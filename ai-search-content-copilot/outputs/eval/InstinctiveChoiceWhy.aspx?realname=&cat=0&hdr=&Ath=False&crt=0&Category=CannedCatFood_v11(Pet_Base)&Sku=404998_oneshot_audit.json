@@ -1,0 +1,144 @@
+{
+  "summary": {
+    "total_claims": 19,
+    "supported_claims": 12,
+    "partially_supported_claims": 0,
+    "unsupported_claims": 7,
+    "needs_internal_confirmation": 0
+  },
+  "claims": [
+    {
+      "claim": "Since 2006, Instinctive Choice has been a feline favorite, making every mealtime an occasion.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "This premium canned cat food is renowned for its balanced nutrition and delectable flavors, ensuring your cat gets a diet that's as yummy as it is healthy.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "At Instinctive Choice, our commitment to crafting the perfect meal begins with high-quality proteins.",
+      "status": "supported",
+      "evidence": "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "We believe in providing cats with a blend of succulent chicken, turkey, and trout, simmered in rich chicken broth for an irresistible aroma and gourmet flavor that cats instinctively crave.",
+      "status": "supported",
+      "evidence": "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout. These premium ingredients are simmered to perfection in a rich chicken broth, creating an irresistible aroma and gourmet flavor cats instinctively crave.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Our philosophy is centered around ensuring your cat's meals are not only delicious but also nutritionally balanced to support their overall health.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "**High-Quality Proteins:** Chicken, Turkey, Trout",
+      "status": "supported",
+      "evidence": "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "**Chicken Broth:** Rich in flavor and nutrients.",
+      "status": "supported",
+      "evidence": "These premium ingredients are simmered to perfection in a rich chicken broth, creating an irresistible aroma and gourmet flavor cats instinctively crave.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "**Salmon Oil (Preserved With Mixed Tocopherols):** Provides essential omega-6 and omega-3 fatty acids for skin and coat health.",
+      "status": "supported",
+      "evidence": "Salmon Oil (Preserved With Mixed Tocopherols), Natural Flavor, Agar-Agar, Potassium Chloride, Taurine, Choline Chloride, Magnesium Proteinate, Salt, Inulin, Vitamin E Supplement, Zinc Proteinate, Iron Proteinate, Copper Proteinate, Thiamine Mononitrate, Niacin Supplement, Manganese Proteinate, d-Calcium Pantothenate, Sodium Selenite, Vitamin A Supplement, Riboflavin Supplement, Vitamin B12 Supplement, Pyridoxine Hydrochloride, Biotin, Folic Acid, Calcium Iodate, Vitamin D3 Supplement.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "**Natural Flavor:** Adds a natural taste that cats love.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "Our moisture content is crafted with added moisture to ensure your cat stays well-hydrated, happy, and in tip-top shape through all life stages.",
+      "status": "supported",
+      "evidence": "We understand hydration is crucial for your cat's urinary health. That's why Instinctive Choice is crafted with added moisture, ensuring your furry friend stays well-hydrated, happy, and in tip-top shape through all life stages.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Our texture is soft pate-style to guarantee content purrs and clean bowls.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "**Guaranteed Analysis:** Meets AAFCO Cat Food Nutrient Profiles for all life stages.",
+      "status": "supported",
+      "evidence": "Formulated to meet the nutritional levels established by the AAFCO Cat Food Nutrient Profiles for all life stages.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Perfect for cats who are selective about their food.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "Hydration-rich formula supports urinary health.",
+      "status": "supported",
+      "evidence": "We understand hydration is crucial for your cat's urinary health. That's why Instinctive Choice is crafted with added moisture, ensuring your furry friend stays well-hydrated, happy, and in tip-top shape through all life stages.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Suitable for adult cats, kittens, and pregnant/lactating females.",
+      "status": "supported",
+      "evidence": "For adult cats, feed 1 to 1 1/4 cans per 6-8 lbs. of body weight per day. Kittens require up to two and a half times this amount. For pregnant and lactating females, allow free access to food.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "No corn, wheat, or soy.",
+      "status": "supported",
+      "evidence": "- Grain free - Carrageenan free - BPA free recyclable can - No corn, wheat or soy",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Carrageenan free.",
+      "status": "supported",
+      "evidence": "- Grain free - Carrageenan free - BPA free recyclable can - No corn, wheat or soy",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "BPA free recyclable can.",
+      "status": "supported",
+      "evidence": "- Grain free - Carrageenan free - BPA free recyclable can - No corn, wheat or soy",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "No harmful additives.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "remove"
+    }
+  ]
+}
