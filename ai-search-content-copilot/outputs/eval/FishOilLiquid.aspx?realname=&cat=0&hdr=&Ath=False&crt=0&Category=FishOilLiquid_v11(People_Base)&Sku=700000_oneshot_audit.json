@@ -1,0 +1,116 @@
+{
+  "summary": {
+    "total_claims": 15,
+    "supported_claims": 2,
+    "partially_supported_claims": 7,
+    "unsupported_claims": 5,
+    "needs_internal_confirmation": 1
+  },
+  "claims": [
+    {
+      "claim": "Omega-3 fatty acids are essential polyunsaturated fatty acids crucial for cellular health and development.",
+      "status": "supported",
+      "evidence": "There are three important Omega-3 fatty acids: alpha-linolenic acid (ALA), eicosapentaenoic acid (EPA), and docosahexaenoic acid (DHA). EPA and DHA are found in fish, while ALA is found only in plant foods such as flaxseed meal.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "This product focuses on providing high-quality Omega-3s, specifically EPA and DHA, from fish oil, supplemented with natural sesame oil rich in sesamin and lignans.",
+      "status": "partially_supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA). Cold-water fish, like anchovies, salmon and sardines, are considered the best source for these essential fatty acids.",
+      "risk_level": "low",
+      "recommended_action": "soften"
+    },
+    {
+      "claim": "Our formulation philosophy is centered around delivering a balanced blend of Omega-3 fatty acids to support overall health while ensuring purity and safety.",
+      "status": "needs_internal_confirmation",
+      "evidence": "",
+      "risk_level": "low",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "We prioritize using sustainable sources and rigorous purification processes to minimize contaminants like mercury and other toxins commonly found in fish oils.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "Eicosapentaenoic Acid (EPA) & Docosahexaenoic Acid (DHA): Derived from cold-water fish, these are the primary active ingredients known for their health benefits.",
+      "status": "supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA). Cold-water fish, like anchovies, salmon and sardines, are considered the best source for these essential fatty acids.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Sesamin and Lignans: Naturally sourced from sesame oil, these compounds contribute additional health benefits.",
+      "status": "partially_supported",
+      "evidence": "Sesame oil is a natural source of sesamin, lignans that come from the 1% solid portion of the kernel\u2019s oil. Sesame and sesame lignans are associated with health benefits in humans.",
+      "risk_level": "low",
+      "recommended_action": "soften"
+    },
+    {
+      "claim": "High Purity: Rigorous purification processes to ensure minimal contamination.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "Balanced Omega Ratio: A blend of fish oil with sesamin and lignans for a comprehensive approach to health.",
+      "status": "partially_supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA). Cold-water fish, like anchovies, salmon and sardines, are considered the best source for these essential fatty acids.",
+      "risk_level": "low",
+      "recommended_action": "soften"
+    },
+    {
+      "claim": "Sustainable Sourcing: Ethical and sustainable practices in sourcing our ingredients.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "medium",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "Supporting Brain Health: EPA is recognized for optimal brain function, while DHA supports visual and nervous system development.",
+      "status": "partially_supported",
+      "evidence": "Studies have demonstrated that EPA is important for optimal brain function and contributes to the reduction of cellular inflammation. DHA has been recognized for brain, visual and nervous system health and development.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Heart Health: Both EPA and DHA contribute to good cardiovascular health.",
+      "status": "partially_supported",
+      "evidence": "Studies have demonstrated that EPA is important for optimal brain function and contributes to the reduction of cellular inflammation. DHA has been recognized for brain, visual and nervous system health and development.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Immune System Support: Omega-3s are crucial for maintaining a healthy immune response.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "medium",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "Joint Mobility and Kidney Function: These fatty acids help maintain overall joint movement and kidney function.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "Mood Regulation and Wellbeing: Balanced mood and sense of wellbeing can be supported through adequate intake.",
+      "status": "partially_supported",
+      "evidence": "Studies have demonstrated that EPA is important for optimal brain function and contributes to the reduction of cellular inflammation. DHA has been recognized for brain, visual and nervous system health and development.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Our product stands out by offering a high-quality, purified fish oil combined with the health benefits of sesame lignans.",
+      "status": "partially_supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA). Cold-water fish, like anchovies, salmon and sardines, are considered the best source for these essential fatty acids.",
+      "risk_level": "low",
+      "recommended_action": "soften"
+    }
+  ]
+}

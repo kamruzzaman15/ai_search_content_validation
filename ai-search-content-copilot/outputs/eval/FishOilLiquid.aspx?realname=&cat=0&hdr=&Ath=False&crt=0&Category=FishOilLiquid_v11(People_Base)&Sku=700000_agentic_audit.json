@@ -1,0 +1,67 @@
+{
+  "summary": {
+    "total_claims": 8,
+    "supported_claims": 5,
+    "partially_supported_claims": 0,
+    "unsupported_claims": 1,
+    "needs_internal_confirmation": 2
+  },
+  "claims": [
+    {
+      "claim": "Life's Abundance offers a high-concentration fish oil supplement sourced from clean waters and third-party tested for purity.",
+      "status": "supported",
+      "evidence": "This product emphasizes essential fatty acids, particularly EPA and DHA, for overall health benefits.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "The body does not manufacture Omega-3's, which are classified as 'essential fatty acids' (EFA\u2019s) because they must be obtained from food due to the body not manufacturing them.",
+      "status": "supported",
+      "evidence": "Because the body does not manufacture them, Omega-3's are classified as 'essential fatty acids' (EFA\u2019s), as it is essential they be obtained from food.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA).",
+      "status": "supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA).",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Cold-water fish like anchovies, salmon, and sardines are considered the best sources of these essential fatty acids.",
+      "status": "supported",
+      "evidence": "Cold-water fish, like anchovies, salmon and sardines, are considered the best source for these essential fatty acids.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "High concentration of EPA & DHA",
+      "status": "needs_internal_confirmation",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "Third-party tested for purity",
+      "status": "needs_internal_confirmation",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "Life's Abundance fish oil is more effective than other sources like flaxseed, with higher concentrations of EPA and DHA.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "remove"
+    },
+    {
+      "claim": "You should never stop taking any medication without first consulting your physician.",
+      "status": "supported",
+      "evidence": "Of course, you should never stop taking any medication without first consulting your physician.",
+      "risk_level": "high",
+      "recommended_action": "keep"
+    }
+  ]
+}

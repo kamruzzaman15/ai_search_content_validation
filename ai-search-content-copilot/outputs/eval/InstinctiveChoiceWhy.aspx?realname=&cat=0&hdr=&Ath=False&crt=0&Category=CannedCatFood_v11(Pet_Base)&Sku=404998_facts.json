@@ -1,0 +1,85 @@
+{
+  "product_name": "Instinctive Choice All Life Stage Cat Food",
+  "product_line": "",
+  "product_category": "Canned Cat Food",
+  "short_summary": "A premium grain-free cat food with a blend of chicken, turkey, and trout, designed to meet the nutritional needs of cats.",
+  "formulation_philosophy": {
+    "summary": "The formulation philosophy emphasizes high-quality proteins and balanced nutrition for cats.",
+    "evidence": [
+      "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout."
+    ]
+  },
+  "key_ingredients": [
+    {
+      "ingredient": "Chicken",
+      "stated_role": "High-quality protein source",
+      "evidence": [
+        "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout."
+      ]
+    },
+    {
+      "ingredient": "Turkey",
+      "stated_role": "High-quality protein source",
+      "evidence": [
+        "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout."
+      ]
+    },
+    {
+      "ingredient": "Trout",
+      "stated_role": "High-quality protein source",
+      "evidence": [
+        "Starting with high-quality proteins, this recipe features a succulent blend of chicken, turkey, and trout."
+      ]
+    }
+  ],
+  "differentiators": [
+    {
+      "point": "Grain-free formula",
+      "evidence": [
+        "- Grain free"
+      ]
+    },
+    {
+      "point": "Organic ingredients",
+      "evidence": [
+        "Organic chicken plus turkey, liver & shrimp"
+      ]
+    },
+    {
+      "point": "BPA-free recyclable can",
+      "evidence": [
+        "BPA free recyclable can"
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "point": "Suitable for all life stages of cats",
+      "evidence": [
+        "Formulated to meet the nutritional levels established by the AAFCO Cat Food Nutrient Profiles for all life stages."
+      ]
+    },
+    {
+      "point": "Promotes hydration and urinary health",
+      "evidence": [
+        "With a soft, pate-style texture, gone are the days of your cat turning their whiskers up at mealtime! Content purrs and clean bowls are guaranteed. - Grain free"
+      ]
+    }
+  ],
+  "competitive_positioning": [
+    {
+      "positioning_statement": "Competitive pricing compared to other brands",
+      "evidence": [
+        "This comparison has been created by Life's Abundance and is meant to illustrate the differences in pricing between pet food it provides under the mark Life\u2019s Abundance\u00ae and those provided by other companies. All entries related to pricing in the comparison table have been made on the basis of information available January 2023 and are based on typical suggested retail or list price of each brand, gathered from searching various online retailers January 2023."
+      ],
+      "review_needed": false
+    }
+  ],
+  "claims_needing_review": [
+    "Guaranteed Analysis: Crude Protein (min) 12.0%, Crude Fat (min) 7.5%, Crude Fiber (max) 1.0%, Moisture (max) 78.0%, Magnesium (max) 0.04%, Vitamin E (min) 60 IU/kg, Taurine (min) 0.10%, Omega-6 Fatty Acids* (min) 1.20%, Omega-3 Fatty Acids* (min) 0.30% *Not recognized as an essential nutrient by the AAFCO cat food nutrient profiles."
+  ],
+  "missing_information": [
+    "Specific pricing details for Instinctive Choice",
+    "Detailed nutritional benefits beyond the guaranteed analysis"
+  ]
+}

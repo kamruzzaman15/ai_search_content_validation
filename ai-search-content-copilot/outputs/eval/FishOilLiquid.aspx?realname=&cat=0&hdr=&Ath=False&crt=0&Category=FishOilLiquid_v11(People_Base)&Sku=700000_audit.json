@@ -1,0 +1,53 @@
+{
+  "summary": {
+    "total_claims": 6,
+    "supported_claims": 2,
+    "partially_supported_claims": 3,
+    "unsupported_claims": 1,
+    "needs_internal_confirmation": 0
+  },
+  "claims": [
+    {
+      "claim": "Life's Abundance Fish Oil Liquid is a high-concentration supplement designed to provide essential Omega-3 fatty acids EPA and DHA.",
+      "status": "supported",
+      "evidence": "Fish oil is the richest source for eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA).",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "The formulation philosophy emphasizes the importance of high concentration and purity in fish oil supplements, with Life's Abundance sourcing from clean waters and third-party testing for purity.",
+      "status": "partially_supported",
+      "evidence": "Fish sourced from some of world\u2019s cleanest waters - Stringent scientific testing (IFOS 5-star Rating)",
+      "risk_level": "medium",
+      "recommended_action": "soften"
+    },
+    {
+      "claim": "The key ingredient is EPA & DHA, essential Omega-3 fatty acids for health benefits.",
+      "status": "supported",
+      "evidence": "The Omega-3\u2019s EPA and DHA are recognized for their health benefits in all life stages.",
+      "risk_level": "low",
+      "recommended_action": "keep"
+    },
+    {
+      "claim": "Life's Abundance Fish Oil Liquid stands out with its higher concentration compared to other sources.",
+      "status": "partially_supported",
+      "evidence": "You would need almost four tablespoons of flaxseed oil to get the same amount of EPA and DHA found in one teaspoon of Life's Abundance Fish Oil!",
+      "risk_level": "high",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "Life's Abundance Fish Oil Liquid is a superior choice due to its high concentration, purity, and third-party testing.",
+      "status": "partially_supported",
+      "evidence": "Third-party tested for purity - High concentration of EPA & DHA - Stringent scientific testing (IFOS 5-star Rating)",
+      "risk_level": "high",
+      "recommended_action": "seek_internal_confirmation"
+    },
+    {
+      "claim": "The product supports various health aspects: a healthy brain, a healthy heart, a healthy immune system, healthy joint movement, healthy kidneys, and a balanced mood and sense of wellbeing.",
+      "status": "unsupported",
+      "evidence": "",
+      "risk_level": "high",
+      "recommended_action": "remove"
+    }
+  ]
+}
