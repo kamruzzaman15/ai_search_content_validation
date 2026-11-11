@@ -1,0 +1,6 @@
+{
+  "planner":       {"tool": "claude", "effort": "high",   "model": "opus"},
+  "plan_reviewer": {"tool": "codex",  "effort": "high",   "model": ""},
+  "implementer":   {"tool": "claude", "effort": "high",   "model": "opus"},
+  "code_reviewer": {"tool": "codex",  "effort": "high",   "model": ""}
+}

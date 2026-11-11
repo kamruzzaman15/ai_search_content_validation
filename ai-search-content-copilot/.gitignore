@@ -1,0 +1,5 @@
+outputs/brand_study/
+.pytest_cache/
+# New packages only: some src/**/__pycache__ files are already tracked, so __pycache__/ is not ignored globally.
+brand_study/__pycache__/
+tests/**/__pycache__/

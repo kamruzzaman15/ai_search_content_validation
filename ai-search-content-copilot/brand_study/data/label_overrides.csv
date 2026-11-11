@@ -1,0 +1,7 @@
+key_type,key,category,note
+# Add one row per correction. key_type is domain or entity; category is one of:
+# big_brand, small_local, marketplace_retailer, directory_media_other, not_a_brand, unknown
+# Examples (remove the leading # to use):
+# domain,buddybrew.com,small_local,independent Tampa roaster
+# entity,Buddy Brew Coffee,small_local,independent Tampa roaster
+# entity,For Oily Skin,not_a_brand,list heading not a business

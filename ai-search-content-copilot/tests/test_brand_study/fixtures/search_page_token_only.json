@@ -1,0 +1,104 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://www.cerave.com/moisturizer",
+   "displayed_link": "https://www.cerave.com/moisturizer",
+   "snippet": "...",
+   "source": "www.cerave.com"
+  },
+  {
+   "position": 2,
+   "title": "Result 2",
+   "link": "https://www.sephora.com/x",
+   "displayed_link": "https://www.sephora.com/x",
+   "snippet": "...",
+   "source": "www.sephora.com"
+  },
+  {
+   "position": 3,
+   "title": "Result 3",
+   "link": "https://www.healthline.com/oily",
+   "displayed_link": "https://www.healthline.com/oily",
+   "snippet": "...",
+   "source": "www.healthline.com"
+  },
+  {
+   "position": 4,
+   "title": "Result 4",
+   "link": "https://www.reddit.com/r/skincare",
+   "displayed_link": "https://www.reddit.com/r/skincare",
+   "snippet": "...",
+   "source": "www.reddit.com"
+  },
+  {
+   "position": 5,
+   "title": "Result 5",
+   "link": "https://www.amazon.com/dp/1",
+   "displayed_link": "https://www.amazon.com/dp/1",
+   "snippet": "...",
+   "source": "www.amazon.com"
+  },
+  {
+   "position": 6,
+   "title": "Result 6",
+   "link": "https://www.laroche-posay.us/x",
+   "displayed_link": "https://www.laroche-posay.us/x",
+   "snippet": "...",
+   "source": "www.laroche-posay.us"
+  },
+  {
+   "position": 7,
+   "title": "Result 7",
+   "link": "https://smallskin.myshopify.com/",
+   "displayed_link": "https://smallskin.myshopify.com/",
+   "snippet": "...",
+   "source": "smallskin.myshopify.com"
+  },
+  {
+   "position": 8,
+   "title": "Result 8",
+   "link": "https://www.byrdie.com/x",
+   "displayed_link": "https://www.byrdie.com/x",
+   "snippet": "...",
+   "source": "www.byrdie.com"
+  },
+  {
+   "position": 9,
+   "title": "Result 9",
+   "link": "https://www.allure.com/x",
+   "displayed_link": "https://www.allure.com/x",
+   "snippet": "...",
+   "source": "www.allure.com"
+  },
+  {
+   "position": 10,
+   "title": "Result 10",
+   "link": "https://www.ulta.com/x",
+   "displayed_link": "https://www.ulta.com/x",
+   "snippet": "...",
+   "source": "www.ulta.com"
+  },
+  {
+   "position": 11,
+   "title": "Result 11",
+   "link": "https://www.neutrogena.com/eleven",
+   "displayed_link": "https://www.neutrogena.com/eleven",
+   "snippet": "...",
+   "source": "www.neutrogena.com"
+  }
+ ],
+ "ai_overview": {
+  "page_token": "FAKE_PAGE_TOKEN_abc",
+  "serpapi_link": "https://serpapi.com/search.json?engine=google_ai_overview&page_token=FAKE_PAGE_TOKEN_abc"
+ }
+}

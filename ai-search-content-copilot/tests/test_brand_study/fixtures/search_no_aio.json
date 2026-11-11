@@ -1,0 +1,52 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://www.amazon.com/coffee",
+   "displayed_link": "https://www.amazon.com/coffee",
+   "snippet": "...",
+   "source": "www.amazon.com"
+  },
+  {
+   "position": 2,
+   "title": "Result 2",
+   "link": "https://www.lavazza.com/x",
+   "displayed_link": "https://www.lavazza.com/x",
+   "snippet": "...",
+   "source": "www.lavazza.com"
+  },
+  {
+   "position": 3,
+   "title": "Result 3",
+   "link": "https://www.peets.com/y",
+   "displayed_link": "https://www.peets.com/y",
+   "snippet": "...",
+   "source": "www.peets.com"
+  },
+  {
+   "position": 4,
+   "title": "Result 4",
+   "link": "https://www.illy.com/z",
+   "displayed_link": "https://www.illy.com/z",
+   "snippet": "...",
+   "source": "www.illy.com"
+  },
+  {
+   "position": 5,
+   "title": "Result 5",
+   "link": "https://smallroaster.com/",
+   "displayed_link": "https://smallroaster.com/",
+   "snippet": "...",
+   "source": "smallroaster.com"
+  }
+ ]
+}

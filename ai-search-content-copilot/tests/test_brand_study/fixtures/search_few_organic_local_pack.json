@@ -1,0 +1,45 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 2,
+   "title": "b",
+   "link": "https://www.yelp.com/a"
+  },
+  {
+   "position": 1,
+   "title": "a",
+   "link": "https://www.yelp.com/b"
+  },
+  {
+   "position": 3,
+   "title": "nolink"
+  },
+  "garbage",
+  {
+   "position": "x",
+   "title": "weird",
+   "link": "https://oddcafe.com/"
+  }
+ ],
+ "local_results": [
+  {
+   "position": 1,
+   "title": "Odd Cafe",
+   "website": "https://oddcafe.com"
+  },
+  {
+   "title": "No Site Cafe"
+  },
+  {
+   "bad": "place"
+  }
+ ]
+}

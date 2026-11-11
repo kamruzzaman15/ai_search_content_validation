@@ -1,0 +1,291 @@
+match_type,pattern,entity,category,sector,subtype,basis,ambiguous,notes
+domain,starbucks.com,Starbucks,big_brand,coffee,,c,no,Starbucks Corp. (NASDAQ: SBUX); stores in all states
+name,Starbucks,Starbucks,big_brand,coffee,,c,no,Starbucks Corp. (NASDAQ: SBUX); stores in all states
+domain,dunkindonuts.com,Dunkin',big_brand,coffee,,c,no,Inspire Brands; national franchise
+domain,dunkin.com,Dunkin',big_brand,coffee,,c,no,Inspire Brands; national franchise
+name,Dunkin',Dunkin',big_brand,coffee,,c,no,Inspire Brands; national franchise
+domain,dutchbros.com,Dutch Bros,big_brand,coffee,,c,no,Dutch Bros Inc. (NYSE: BROS); multi-state
+name,Dutch Bros,Dutch Bros,big_brand,coffee,,c,no,Dutch Bros Inc. (NYSE: BROS); multi-state
+domain,timhortons.com,Tim Hortons,big_brand,coffee,,a,no,Restaurant Brands International (NYSE: QSR)
+name,Tim Hortons,Tim Hortons,big_brand,coffee,,a,no,Restaurant Brands International (NYSE: QSR)
+domain,peets.com,Peet's,big_brand,coffee,,a,no,JDE Peet's (Euronext)
+name,Peet's,Peet's,big_brand,coffee,,a,no,JDE Peet's (Euronext)
+domain,cariboucoffee.com,Caribou Coffee,big_brand,coffee,,a,no,JAB Holding; multi-state chain
+name,Caribou Coffee,Caribou Coffee,big_brand,coffee,,a,no,JAB Holding; multi-state chain
+domain,mcdonalds.com,McCafe,big_brand,coffee,,a,no,McDonald's Corp. (NYSE: MCD)
+name,McCafe,McCafe,big_brand,coffee,,a,no,McDonald's Corp. (NYSE: MCD)
+domain,panerabread.com,Panera,big_brand,coffee,,c,no,JAB Holding / Panera Brands; national chain
+name,Panera,Panera,big_brand,coffee,,c,no,JAB Holding / Panera Brands; national chain
+domain,krispykreme.com,Krispy Kreme,big_brand,coffee,,a,no,Krispy Kreme Inc. (NASDAQ: DNUT)
+name,Krispy Kreme,Krispy Kreme,big_brand,coffee,,a,no,Krispy Kreme Inc. (NASDAQ: DNUT)
+domain,nespresso.com,Nespresso,big_brand,coffee,,a,no,Nestle S.A.
+name,Nespresso,Nespresso,big_brand,coffee,,a,no,Nestle S.A.
+domain,keurig.com,Keurig,big_brand,coffee,,a,no,Keurig Dr Pepper (NASDAQ: KDP)
+name,Keurig,Keurig,big_brand,coffee,,a,no,Keurig Dr Pepper (NASDAQ: KDP)
+domain,folgers.com,Folgers,big_brand,coffee,,a,no,J.M. Smucker Co. (NYSE: SJM)
+name,Folgers,Folgers,big_brand,coffee,,a,no,J.M. Smucker Co. (NYSE: SJM)
+domain,maxwellhouse.com,Maxwell House,big_brand,coffee,,a,no,Kraft Heinz (NASDAQ: KHC)
+name,Maxwell House,Maxwell House,big_brand,coffee,,a,no,Kraft Heinz (NASDAQ: KHC)
+domain,lavazza.com,Lavazza,big_brand,coffee,,a,no,"Luigi Lavazza S.p.A., multinational group"
+domain,lavazzausa.com,Lavazza,big_brand,coffee,,a,no,"Luigi Lavazza S.p.A., multinational group"
+name,Lavazza,Lavazza,big_brand,coffee,,a,no,"Luigi Lavazza S.p.A., multinational group"
+domain,illy.com,illy,big_brand,coffee,,a,no,"illycaffe S.p.A., multinational; sold at national retailers"
+name,illy,illy,big_brand,coffee,,a,candidate,"illycaffe S.p.A., multinational; sold at national retailers; lone 'illy' is a candidate only"
+domain,deathwishcoffee.com,Death Wish Coffee,big_brand,coffee,,b,no,sold nationally at Walmart/Target/grocery chains
+name,Death Wish Coffee,Death Wish Coffee,big_brand,coffee,,b,no,sold nationally at Walmart/Target/grocery chains
+domain,blackriflecoffee.com,Black Rifle Coffee,big_brand,coffee,,a,no,BRC Inc. (NYSE: BRCC)
+name,Black Rifle Coffee,Black Rifle Coffee,big_brand,coffee,,a,no,BRC Inc. (NYSE: BRCC)
+domain,cafebustelo.com,Cafe Bustelo,big_brand,coffee,,a,no,J.M. Smucker Co. (NYSE: SJM)
+name,Cafe Bustelo,Cafe Bustelo,big_brand,coffee,,a,no,J.M. Smucker Co. (NYSE: SJM)
+domain,cafepilon.com,Pilon,big_brand,coffee,,a,no,J.M. Smucker Co. (via Rowland Coffee Roasters)
+name,Pilon,Pilon,big_brand,coffee,,a,case,J.M. Smucker Co. (via Rowland Coffee Roasters)
+domain,stumptowncoffee.com,Stumptown,big_brand,coffee,,a,no,JDE Peet's
+name,Stumptown,Stumptown,big_brand,coffee,,a,no,JDE Peet's
+domain,bluebottlecoffee.com,Blue Bottle,big_brand,coffee,,a,no,Nestle S.A. (majority)
+name,Blue Bottle,Blue Bottle,big_brand,coffee,,a,no,Nestle S.A. (majority)
+name,Dunkin,Dunkin',big_brand,coffee,,c,no,alias
+name,Dunkin Donuts,Dunkin',big_brand,coffee,,c,no,alias
+name,Caribou,Caribou Coffee,big_brand,coffee,,a,case,alias; common word
+name,Peet's Coffee,Peet's,big_brand,coffee,,a,no,alias
+name,McDonald's,McCafe,big_brand,coffee,,a,no,alias
+name,illy coffee,illy,big_brand,coffee,,a,no,unambiguous alias
+name,illy caffe,illy,big_brand,coffee,,a,no,unambiguous alias
+name,Death Wish,Death Wish Coffee,big_brand,coffee,,b,case,alias; common phrase
+name,Black Rifle,Black Rifle Coffee,big_brand,coffee,,a,case,alias
+name,Bustelo,Cafe Bustelo,big_brand,coffee,,a,no,alias
+name,Cafe Pilon,Pilon,big_brand,coffee,,a,no,alias
+name,Stumptown Coffee,Stumptown,big_brand,coffee,,a,no,alias
+name,Blue Bottle Coffee,Blue Bottle,big_brand,coffee,,a,no,alias
+domain,cerave.com,CeraVe,big_brand,skincare,,a,no,L'Oreal
+name,CeraVe,CeraVe,big_brand,skincare,,a,no,L'Oreal
+domain,laroche-posay.us,La Roche-Posay,big_brand,skincare,,a,no,L'Oreal
+domain,laroche-posay.com,La Roche-Posay,big_brand,skincare,,a,no,L'Oreal
+name,La Roche-Posay,La Roche-Posay,big_brand,skincare,,a,no,L'Oreal
+domain,neutrogena.com,Neutrogena,big_brand,skincare,,a,no,Kenvue (NYSE: KVUE)
+name,Neutrogena,Neutrogena,big_brand,skincare,,a,no,Kenvue (NYSE: KVUE)
+domain,cetaphil.com,Cetaphil,big_brand,skincare,,a,no,Galderma (SIX)
+name,Cetaphil,Cetaphil,big_brand,skincare,,a,no,Galderma (SIX)
+domain,olay.com,Olay,big_brand,skincare,,a,no,Procter & Gamble
+name,Olay,Olay,big_brand,skincare,,a,no,Procter & Gamble
+domain,aveeno.com,Aveeno,big_brand,skincare,,a,no,Kenvue
+name,Aveeno,Aveeno,big_brand,skincare,,a,no,Kenvue
+domain,eucerinus.com,Eucerin,big_brand,skincare,,a,no,Beiersdorf
+domain,eucerin.com,Eucerin,big_brand,skincare,,a,no,Beiersdorf
+name,Eucerin,Eucerin,big_brand,skincare,,a,no,Beiersdorf
+domain,clinique.com,Clinique,big_brand,skincare,,a,no,Estee Lauder Companies
+name,Clinique,Clinique,big_brand,skincare,,a,no,Estee Lauder Companies
+domain,esteelauder.com,Estee Lauder,big_brand,skincare,,a,no,Estee Lauder Companies (NYSE: EL)
+name,Estee Lauder,Estee Lauder,big_brand,skincare,,a,no,Estee Lauder Companies (NYSE: EL)
+domain,kiehls.com,Kiehl's,big_brand,skincare,,a,no,L'Oreal
+name,Kiehl's,Kiehl's,big_brand,skincare,,a,no,L'Oreal
+domain,theordinary.com,The Ordinary,big_brand,skincare,,a,no,"Deciem, majority-owned by Estee Lauder Companies"
+name,The Ordinary,The Ordinary,big_brand,skincare,,a,case,"Deciem, majority-owned by Estee Lauder Companies"
+domain,deciem.com,Deciem,big_brand,skincare,,a,no,Estee Lauder Companies
+name,Deciem,Deciem,big_brand,skincare,,a,no,Estee Lauder Companies
+domain,paulaschoice.com,Paula's Choice,big_brand,skincare,,a,no,Unilever
+name,Paula's Choice,Paula's Choice,big_brand,skincare,,a,no,Unilever
+domain,drunkelephant.com,Drunk Elephant,big_brand,skincare,,a,no,Shiseido
+name,Drunk Elephant,Drunk Elephant,big_brand,skincare,,a,no,Shiseido
+domain,tatcha.com,Tatcha,big_brand,skincare,,a,no,Unilever
+name,Tatcha,Tatcha,big_brand,skincare,,a,no,Unilever
+domain,firstaidbeauty.com,First Aid Beauty,big_brand,skincare,,a,no,Procter & Gamble; full name only
+name,First Aid Beauty,First Aid Beauty,big_brand,skincare,,a,no,Procter & Gamble; full name only
+domain,glossier.com,Glossier,big_brand,skincare,,b,no,sold nationally at Sephora
+name,Glossier,Glossier,big_brand,skincare,,b,no,sold nationally at Sephora
+domain,dermalogica.com,Dermalogica,big_brand,skincare,,a,no,Unilever
+name,Dermalogica,Dermalogica,big_brand,skincare,,a,no,Unilever
+domain,murad.com,Murad,big_brand,skincare,,a,no,Unilever
+name,Murad,Murad,big_brand,skincare,,a,no,Unilever
+domain,eltamd.com,EltaMD,big_brand,skincare,,a,no,Colgate-Palmolive
+name,EltaMD,EltaMD,big_brand,skincare,,a,no,Colgate-Palmolive
+domain,supergoop.com,Supergoop!,big_brand,skincare,,b,no,sold nationally at Sephora/Ulta
+name,Supergoop!,Supergoop!,big_brand,skincare,,b,no,sold nationally at Sephora/Ulta
+domain,vanicream.com,Vanicream,big_brand,skincare,,b,no,sold nationally at Target/Walmart/CVS
+name,Vanicream,Vanicream,big_brand,skincare,,b,no,sold nationally at Target/Walmart/CVS
+domain,differin.com,Differin,big_brand,skincare,,a,no,Galderma
+name,Differin,Differin,big_brand,skincare,,a,no,Galderma
+domain,cleanandclear.com,Clean & Clear,big_brand,skincare,,a,no,Kenvue; common phrase
+name,Clean & Clear,Clean & Clear,big_brand,skincare,,a,case,Kenvue; common phrase
+domain,biore.com,Biore,big_brand,skincare,,a,no,Kao Corp.
+name,Biore,Biore,big_brand,skincare,,a,no,Kao Corp.
+name,Estée Lauder,Estee Lauder,big_brand,skincare,,a,no,alias
+name,Paulas Choice,Paula's Choice,big_brand,skincare,,a,no,alias
+name,Elta MD,EltaMD,big_brand,skincare,,a,no,alias
+name,La Roche Posay,La Roche-Posay,big_brand,skincare,,a,no,alias
+domain,waxcenter.com,European Wax Center,big_brand,skincare,national_chain,c,no,European Wax Center Inc. (NASDAQ: EWCZ); national franchise
+name,European Wax Center,European Wax Center,big_brand,skincare,national_chain,c,no,European Wax Center Inc. (NASDAQ: EWCZ); national franchise
+domain,handandstone.com,Hand & Stone,big_brand,skincare,national_chain,c,no,"national franchise, multi-state"
+name,Hand & Stone,Hand & Stone,big_brand,skincare,national_chain,c,case,"national franchise, multi-state"
+domain,massageenvy.com,Massage Envy,big_brand,skincare,national_chain,c,no,national franchise
+name,Massage Envy,Massage Envy,big_brand,skincare,national_chain,c,no,national franchise
+domain,heydayskincare.com,Heyday,big_brand,skincare,national_chain,c,no,facial studios in several states; common word
+name,Heyday,Heyday,big_brand,skincare,national_chain,c,case_mid,facial studios in several states; common word
+domain,idealimage.com,Ideal Image,big_brand,skincare,national_chain,c,no,national med-spa chain; common phrase
+name,Ideal Image,Ideal Image,big_brand,skincare,national_chain,c,case,national med-spa chain; common phrase
+domain,laseraway.com,LaserAway,big_brand,skincare,national_chain,c,no,multi-state med-spa chain
+name,LaserAway,LaserAway,big_brand,skincare,national_chain,c,no,multi-state med-spa chain
+domain,amazon.com,Amazon,marketplace_retailer,any,,marketplace,no,
+name,Amazon,Amazon,marketplace_retailer,any,,marketplace,no,
+domain,walmart.com,Walmart,marketplace_retailer,any,,marketplace,no,
+name,Walmart,Walmart,marketplace_retailer,any,,marketplace,no,
+domain,target.com,Target,marketplace_retailer,any,,marketplace,no,
+name,Target,Target,marketplace_retailer,any,,marketplace,case_mid,common word
+domain,sephora.com,Sephora,marketplace_retailer,any,,marketplace,no,
+name,Sephora,Sephora,marketplace_retailer,any,,marketplace,no,
+domain,ulta.com,Ulta,marketplace_retailer,any,,marketplace,no,
+name,Ulta,Ulta,marketplace_retailer,any,,marketplace,no,
+domain,cvs.com,CVS,marketplace_retailer,any,,marketplace,no,
+name,CVS,CVS,marketplace_retailer,any,,marketplace,case,common word
+domain,walgreens.com,Walgreens,marketplace_retailer,any,,marketplace,no,
+name,Walgreens,Walgreens,marketplace_retailer,any,,marketplace,no,
+domain,dermstore.com,Dermstore,marketplace_retailer,any,,marketplace,no,
+name,Dermstore,Dermstore,marketplace_retailer,any,,marketplace,no,
+domain,nordstrom.com,Nordstrom,marketplace_retailer,any,,marketplace,no,
+name,Nordstrom,Nordstrom,marketplace_retailer,any,,marketplace,no,
+domain,macys.com,Macy's,marketplace_retailer,any,,marketplace,no,
+name,Macy's,Macy's,marketplace_retailer,any,,marketplace,no,
+domain,costco.com,Costco,marketplace_retailer,any,,marketplace,no,
+name,Costco,Costco,marketplace_retailer,any,,marketplace,no,
+domain,iherb.com,iHerb,marketplace_retailer,any,,marketplace,no,
+name,iHerb,iHerb,marketplace_retailer,any,,marketplace,no,
+domain,yesstyle.com,YesStyle,marketplace_retailer,any,,marketplace,no,
+name,YesStyle,YesStyle,marketplace_retailer,any,,marketplace,no,
+domain,sokoglam.com,Soko Glam,marketplace_retailer,any,,marketplace,no,
+name,Soko Glam,Soko Glam,marketplace_retailer,any,,marketplace,no,
+domain,credobeauty.com,Credo Beauty,marketplace_retailer,any,,marketplace,no,
+name,Credo Beauty,Credo Beauty,marketplace_retailer,any,,marketplace,no,
+domain,ubereats.com,Uber Eats,marketplace_retailer,any,,marketplace,no,
+name,Uber Eats,Uber Eats,marketplace_retailer,any,,marketplace,no,
+domain,doordash.com,DoorDash,marketplace_retailer,any,,marketplace,no,
+name,DoorDash,DoorDash,marketplace_retailer,any,,marketplace,no,
+domain,grubhub.com,Grubhub,marketplace_retailer,any,,marketplace,no,
+name,Grubhub,Grubhub,marketplace_retailer,any,,marketplace,no,
+domain,instacart.com,Instacart,marketplace_retailer,any,,marketplace,no,
+name,Instacart,Instacart,marketplace_retailer,any,,marketplace,no,
+name,Ulta Beauty,Ulta,marketplace_retailer,any,,marketplace,no,alias
+domain,yelp.com,Yelp,directory_media_other,any,,directory,no,
+name,Yelp,Yelp,directory_media_other,any,,directory,no,
+domain,tripadvisor.com,Tripadvisor,directory_media_other,any,,directory,no,
+name,Tripadvisor,Tripadvisor,directory_media_other,any,,directory,no,
+domain,reddit.com,Reddit,directory_media_other,any,,directory,no,
+name,Reddit,Reddit,directory_media_other,any,,directory,no,
+domain,facebook.com,Facebook,directory_media_other,any,,directory,no,
+name,Facebook,Facebook,directory_media_other,any,,directory,no,
+domain,instagram.com,Instagram,directory_media_other,any,,directory,no,
+name,Instagram,Instagram,directory_media_other,any,,directory,no,
+domain,tiktok.com,TikTok,directory_media_other,any,,directory,no,
+name,TikTok,TikTok,directory_media_other,any,,directory,no,
+domain,youtube.com,YouTube,directory_media_other,any,,directory,no,
+name,YouTube,YouTube,directory_media_other,any,,directory,no,
+domain,foursquare.com,Foursquare,directory_media_other,any,,directory,no,
+name,Foursquare,Foursquare,directory_media_other,any,,directory,no,
+domain,maps.google.com,Google Maps,directory_media_other,any,,directory,no,
+domain,shopping.google.com,Google Shopping,marketplace_retailer,any,,marketplace,no,google.com/search?ibp=oshop product panels cited by AI Overviews
+name,Google Maps,Google Maps,directory_media_other,any,,directory,no,
+domain,opentable.com,OpenTable,directory_media_other,any,,directory,no,
+name,OpenTable,OpenTable,directory_media_other,any,,directory,no,
+domain,groupon.com,Groupon,directory_media_other,any,,directory,no,
+name,Groupon,Groupon,directory_media_other,any,,directory,no,
+domain,quora.com,Quora,directory_media_other,any,,directory,no,
+name,Quora,Quora,directory_media_other,any,,directory,no,
+domain,wikipedia.org,Wikipedia,directory_media_other,any,,directory,no,
+name,Wikipedia,Wikipedia,directory_media_other,any,,directory,no,
+domain,pinterest.com,Pinterest,directory_media_other,any,,directory,no,
+name,Pinterest,Pinterest,directory_media_other,any,,directory,no,
+domain,timeout.com,Time Out,directory_media_other,any,,directory,no,
+name,Time Out,Time Out,directory_media_other,any,,directory,case,common word
+domain,eater.com,Eater,directory_media_other,any,,directory,no,
+name,Eater,Eater,directory_media_other,any,,directory,case_mid,common word
+domain,thrillist.com,Thrillist,directory_media_other,any,,directory,no,
+name,Thrillist,Thrillist,directory_media_other,any,,directory,no,
+domain,tampabay.com,Tampa Bay Times,directory_media_other,any,,directory,no,
+name,Tampa Bay Times,Tampa Bay Times,directory_media_other,any,,directory,no,
+domain,miaminewtimes.com,Miami New Times,directory_media_other,any,,directory,no,
+name,Miami New Times,Miami New Times,directory_media_other,any,,directory,no,
+domain,orlandoweekly.com,Orlando Weekly,directory_media_other,any,,directory,no,
+name,Orlando Weekly,Orlando Weekly,directory_media_other,any,,directory,no,
+domain,cltampa.com,Creative Loafing Tampa,directory_media_other,any,,directory,no,
+name,Creative Loafing Tampa,Creative Loafing Tampa,directory_media_other,any,,directory,no,
+domain,jacksonville.com,Florida Times-Union,directory_media_other,any,,directory,no,
+name,Florida Times-Union,Florida Times-Union,directory_media_other,any,,directory,no,
+domain,healthline.com,Healthline,directory_media_other,any,,directory,no,
+name,Healthline,Healthline,directory_media_other,any,,directory,no,
+domain,allure.com,Allure,directory_media_other,any,,directory,no,
+name,Allure,Allure,directory_media_other,any,,directory,case_mid,common word
+domain,byrdie.com,Byrdie,directory_media_other,any,,directory,no,
+name,Byrdie,Byrdie,directory_media_other,any,,directory,no,
+domain,vogue.com,Vogue,directory_media_other,any,,directory,no,
+name,Vogue,Vogue,directory_media_other,any,,directory,case_mid,common word
+domain,nytimes.com,New York Times,directory_media_other,any,,directory,no,
+name,New York Times,New York Times,directory_media_other,any,,directory,no,
+domain,cosmopolitan.com,Cosmopolitan,directory_media_other,any,,directory,no,
+name,Cosmopolitan,Cosmopolitan,directory_media_other,any,,directory,case_mid,common word
+domain,verywellhealth.com,Verywell Health,directory_media_other,any,,directory,no,
+name,Verywell Health,Verywell Health,directory_media_other,any,,directory,no,
+domain,aad.org,American Academy of Dermatology,directory_media_other,any,,directory,no,
+name,American Academy of Dermatology,American Academy of Dermatology,directory_media_other,any,,directory,no,
+domain,google.com,,directory_media_other,any,,directory,no,
+domain,x.com,,directory_media_other,any,,directory,no,
+domain,twitter.com,,directory_media_other,any,,directory,no,
+domain,linkedin.com,,directory_media_other,any,,directory,no,
+domain,forbes.com,,directory_media_other,any,,directory,no,
+domain,goodhousekeeping.com,,directory_media_other,any,,directory,no,
+domain,womenshealthmag.com,,directory_media_other,any,,directory,no,
+domain,refinery29.com,,directory_media_other,any,,directory,no,
+domain,nymag.com,,directory_media_other,any,,directory,no,
+domain,consumerreports.org,,directory_media_other,any,,directory,no,
+domain,cnn.com,,directory_media_other,any,,directory,no,
+domain,seriouseats.com,,directory_media_other,any,,directory,no,
+domain,foodandwine.com,,directory_media_other,any,,directory,no,
+domain,bonappetit.com,,directory_media_other,any,,directory,no,
+domain,webmd.com,,directory_media_other,any,,directory,no,
+domain,mayoclinic.org,,directory_media_other,any,,directory,no,
+domain,clevelandclinic.org,,directory_media_other,any,,directory,no,
+domain,medicalnewstoday.com,,directory_media_other,any,,directory,no,
+domain,ewg.org,,directory_media_other,any,,directory,no,
+domain,usatoday.com,,directory_media_other,any,,directory,no,
+domain,yahoo.com,,directory_media_other,any,,directory,no,
+domain,msn.com,,directory_media_other,any,,directory,no,
+domain,bbb.org,,directory_media_other,any,,directory,no,
+domain,nextdoor.com,,directory_media_other,any,,directory,no,
+domain,mapquest.com,,directory_media_other,any,,directory,no,
+domain,yellowpages.com,,directory_media_other,any,,directory,no,
+domain,booksy.com,,directory_media_other,any,,directory,no,
+domain,vagaro.com,,directory_media_other,any,,directory,no,
+domain,fresha.com,,directory_media_other,any,,directory,no,
+domain,realself.com,,directory_media_other,any,,directory,no,
+domain,zocdoc.com,,directory_media_other,any,,directory,no,
+domain,healthgrades.com,,directory_media_other,any,,directory,no,
+domain,vitals.com,,directory_media_other,any,,directory,no,
+domain,wellnessliving.com,,directory_media_other,any,,directory,no,
+name,hyaluronic acid,hyaluronic acid,not_a_brand,any,,ingredient,no,
+name,niacinamide,niacinamide,not_a_brand,any,,ingredient,no,
+name,retinol,retinol,not_a_brand,any,,ingredient,no,
+name,vitamin c,vitamin c,not_a_brand,any,,ingredient,no,
+name,salicylic acid,salicylic acid,not_a_brand,any,,ingredient,no,
+name,ceramides,ceramides,not_a_brand,any,,ingredient,no,
+name,zinc oxide,zinc oxide,not_a_brand,any,,ingredient,no,
+name,spf,spf,not_a_brand,any,,ingredient,no,
+name,oil-free,oil-free,not_a_brand,any,,attribute,no,
+name,fragrance-free,fragrance-free,not_a_brand,any,,attribute,no,
+name,non-comedogenic,non-comedogenic,not_a_brand,any,,attribute,no,
+name,ambiance,ambiance,not_a_brand,any,,attribute,no,
+name,price,price,not_a_brand,any,,attribute,no,
+name,location,location,not_a_brand,any,,attribute,no,
+name,wifi,wifi,not_a_brand,any,,attribute,no,
+name,outdoor seating,outdoor seating,not_a_brand,any,,attribute,no,
+name,cold brew,cold brew,not_a_brand,any,,ingredient,no,
+name,espresso,espresso,not_a_brand,any,,ingredient,no,
+name,latte,latte,not_a_brand,any,,ingredient,no,
+name,benzoyl peroxide,benzoyl peroxide,not_a_brand,any,,ingredient,no,
+name,azelaic acid,azelaic acid,not_a_brand,any,,ingredient,no,
+name,glycolic acid,glycolic acid,not_a_brand,any,,ingredient,no,
+name,sunscreen,sunscreen,not_a_brand,any,,ingredient,no,
+name,moisturizer,moisturizer,not_a_brand,any,,ingredient,no,
+name,cleanser,cleanser,not_a_brand,any,,ingredient,no,
+name,serum,serum,not_a_brand,any,,ingredient,no,
+name,pour over,pour over,not_a_brand,any,,ingredient,no,
+name,drip coffee,drip coffee,not_a_brand,any,,ingredient,no,
+name,french press,french press,not_a_brand,any,,ingredient,no,
+name,arabica,arabica,not_a_brand,any,,ingredient,no,
+name,decaf,decaf,not_a_brand,any,,ingredient,no,
