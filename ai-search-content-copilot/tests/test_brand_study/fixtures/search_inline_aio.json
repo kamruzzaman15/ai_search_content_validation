@@ -1,0 +1,202 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://www.yelp.com/search?find_desc=coffee",
+   "displayed_link": "https://www.yelp.com/search?find_desc=coffee",
+   "snippet": "...",
+   "source": "www.yelp.com"
+  },
+  {
+   "position": 2,
+   "title": "Result 2",
+   "link": "https://www.yelp.com/biz/buddy-brew",
+   "displayed_link": "https://www.yelp.com/biz/buddy-brew",
+   "snippet": "...",
+   "source": "www.yelp.com"
+  },
+  {
+   "position": 3,
+   "title": "Result 3",
+   "link": "https://www.starbucks.com/store-locator",
+   "displayed_link": "https://www.starbucks.com/store-locator",
+   "snippet": "...",
+   "source": "www.starbucks.com"
+  },
+  {
+   "position": 4,
+   "title": "Result 4",
+   "link": "https://buddybrew.com/",
+   "displayed_link": "https://buddybrew.com/",
+   "snippet": "...",
+   "source": "buddybrew.com"
+  },
+  {
+   "position": 5,
+   "title": "Result 5",
+   "link": "https://www.tripadvisor.com/x",
+   "displayed_link": "https://www.tripadvisor.com/x",
+   "snippet": "...",
+   "source": "www.tripadvisor.com"
+  },
+  {
+   "position": 6,
+   "title": "Result 6",
+   "link": "https://www.reddit.com/r/tampa/x?utm_source=g",
+   "displayed_link": "https://www.reddit.com/r/tampa/x?utm_source=g",
+   "snippet": "...",
+   "source": "www.reddit.com"
+  },
+  {
+   "position": 7,
+   "title": "Result 7",
+   "link": "https://blackandbrew.square.site/",
+   "displayed_link": "https://blackandbrew.square.site/",
+   "snippet": "...",
+   "source": "blackandbrew.square.site"
+  },
+  {
+   "position": 8,
+   "title": "Result 8",
+   "link": "https://m.facebook.com/somecafe",
+   "displayed_link": "https://m.facebook.com/somecafe",
+   "snippet": "...",
+   "source": "m.facebook.com"
+  },
+  {
+   "position": 9,
+   "title": "Result 9",
+   "link": "https://www.tampabay.com/best-coffee#:~:text=coffee",
+   "displayed_link": "https://www.tampabay.com/best-coffee#:~:text=coffee",
+   "snippet": "...",
+   "source": "www.tampabay.com"
+  },
+  {
+   "position": 10,
+   "title": "Result 10",
+   "link": "https://www.google.com/url?q=https://indiecafe.com/&sa=U",
+   "displayed_link": "https://www.google.com/url?q=https://indiecafe.com/&sa=U",
+   "snippet": "...",
+   "source": "www.google.com"
+  }
+ ],
+ "ai_overview": {
+  "text_blocks": [
+   {
+    "type": "paragraph",
+    "snippet": "Tampa has a strong coffee scene with independent roasters and chains like Starbucks.",
+    "reference_indexes": [
+     0,
+     1
+    ]
+   },
+   {
+    "type": "heading",
+    "snippet": "Top picks"
+   },
+   {
+    "type": "list",
+    "list": [
+     {
+      "title": "Buddy Brew Coffee:",
+      "snippet": "A local roaster with several Tampa cafes.",
+      "reference_indexes": [
+       1
+      ]
+     },
+     {
+      "title": "Black & Brew",
+      "snippet": "Cozy spot downtown.",
+      "reference_indexes": [
+       2
+      ]
+     },
+     {
+      "title": "Pros",
+      "snippet": "Great espresso."
+     }
+    ]
+   },
+   {
+    "type": "expandable",
+    "title": "More options",
+    "text_blocks": [
+     {
+      "type": "paragraph",
+      "snippet": "Dunkin\u2019 is also popular. Available at Target and CVS."
+     }
+    ]
+   }
+  ],
+  "references": [
+   {
+    "title": "Best coffee Tampa",
+    "link": "https://www.yelp.com/search?find_desc=coffee",
+    "snippet": "..",
+    "source": "Yelp",
+    "index": 0
+   },
+   {
+    "title": "Buddy Brew",
+    "link": "https://buddybrew.com/",
+    "snippet": "..",
+    "source": "Buddy Brew",
+    "index": 1
+   },
+   {
+    "title": "Black and Brew",
+    "link": "https://blackandbrew.square.site/",
+    "snippet": "..",
+    "source": "Black & Brew",
+    "index": 2
+   },
+   {
+    "title": "Eater Tampa",
+    "link": "https://tampa.eater.com/maps/best",
+    "snippet": "..",
+    "source": "Eater",
+    "index": 3
+   }
+  ]
+ },
+ "local_results": {
+  "places": [
+   {
+    "position": 1,
+    "title": "Buddy Brew Coffee",
+    "rating": 4.6,
+    "reviews": 1200,
+    "type": "Coffee shop",
+    "links": {
+     "website": "https://buddybrew.com/"
+    }
+   },
+   {
+    "position": 2,
+    "title": "Starbucks",
+    "rating": 4.1,
+    "reviews": 300,
+    "type": "Coffee shop",
+    "links": {
+     "website": "https://www.starbucks.com/"
+    }
+   },
+   {
+    "position": 3,
+    "title": "Black & Brew",
+    "rating": 4.7,
+    "reviews": 800,
+    "type": "Cafe"
+   }
+  ]
+ }
+}

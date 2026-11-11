@@ -1,0 +1,69 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://www.target.com/x",
+   "displayed_link": "https://www.target.com/x",
+   "snippet": "...",
+   "source": "www.target.com"
+  }
+ ],
+ "ai_overview": {
+  "text_blocks": [
+   {
+    "type": "paragraph",
+    "snippet": "Target dark spots with vitamin C. Also target dark spots nightly."
+   },
+   {
+    "type": "paragraph",
+    "snippet": "An ordinary moisturizer works, but The Ordinary Niacinamide is popular. A silly idea: illy."
+   },
+   {
+    "type": "list",
+    "list": [
+     {
+      "title": "Target",
+      "snippet": "Sold at Target and Ulta."
+     },
+     {
+      "title": "Sunny Skin Studio",
+      "snippet": "Local spa."
+     }
+    ]
+   },
+   {
+    "type": "comparison",
+    "comparison": [
+     {
+      "feature": "Price",
+      "values": [
+       "$",
+       "$$"
+      ]
+     }
+    ]
+   }
+  ],
+  "references": []
+ },
+ "local_results": {
+  "places": [
+   {
+    "position": 1,
+    "title": "Sunny Skin Studio",
+    "links": {
+     "website": "https://sunnyskin.com/"
+    }
+   }
+  ]
+ }
+}

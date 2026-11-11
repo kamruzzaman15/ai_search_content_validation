@@ -1,0 +1,24 @@
+{
+ "search_metadata": {"id": "fake_aio_shop", "status": "Success"},
+ "search_parameters": {"engine": "google_ai_overview"},
+ "ai_overview": {
+  "text_blocks": [
+   {"type": "paragraph", "snippet": "Look for oil-free gel-creams with hyaluronic acid.",
+    "snippet_highlighted_words": ["oil-free gel-creams with hyaluronic acid and other lightweight humectant ingredients"],
+    "reference_indexes": [0]},
+   {"type": "heading", "snippet": "Top Moisturizers for Oily Skin"},
+   {"type": "list", "list": [
+    {"shopping_result": {"title": "CeraVe Oil Control Moisturizing Gel-Cream", "price": "$14.99",
+                         "source": "Walgreens.com& more", "product_link": "https://www.google.com/search?ibp=oshop&prds=1"},
+     "list": [{"snippet": "Best for: All-day hydration."}], "reference_indexes": [1]},
+    {"shopping_result": {"title": "Glow Lab Gel Moisturizer", "price": "$8.99", "source": "Glow Lab& more"},
+     "list": [{"snippet": "Specs: Oil-free.", "reference_indexes": [2]}], "reference_indexes": [2]}
+   ]}
+  ],
+  "references": [
+   {"title": "Video", "link": "https://www.youtube.com/watch?v=x", "source": "YouTube", "index": 0},
+   {"title": "CeraVe gel", "link": "https://www.google.com/search?ibp=oshop&prds=pvt%3Ahg", "source": "Google", "index": 1},
+   {"title": "Glow Lab gel", "link": "https://www.google.com/search?ibp=oshop&prds=pvt%3Ahg2", "source": "Google", "index": 2}
+  ]
+ }
+}

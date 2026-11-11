@@ -1,0 +1,67 @@
+{
+ "search_metadata": {
+  "id": "fake_aio_id",
+  "status": "Success"
+ },
+ "ai_overview": {
+  "text_blocks": [
+   {
+    "type": "paragraph",
+    "snippet": "For oily skin, look for oil-free, non-comedogenic formulas such as CeraVe and La Roche-Posay.",
+    "reference_indexes": [
+     0,
+     1
+    ]
+   },
+   {
+    "type": "list",
+    "list": [
+     {
+      "title": "Hyaluronic Acid:",
+      "snippet": "Hydrates without oil."
+     },
+     {
+      "title": "Glow Lab Naturals",
+      "snippet": "An indie brand.",
+      "reference_indexes": [
+       2
+      ]
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "table": [
+     [
+      "Brand",
+      "Why"
+     ],
+     [
+      "Neutrogena Hydro Boost",
+      "gel texture"
+     ]
+    ]
+   }
+  ],
+  "references": [
+   {
+    "title": "CeraVe",
+    "link": "https://www.cerave.com/moisturizer",
+    "source": "CeraVe",
+    "index": 0
+   },
+   {
+    "title": "Healthline",
+    "link": "https://www.healthline.com/oily",
+    "source": "Healthline",
+    "index": 1
+   },
+   {
+    "title": "Glow Lab",
+    "link": "https://glowlab.example.com/",
+    "source": "Glow Lab",
+    "index": 2
+   }
+  ]
+ }
+}

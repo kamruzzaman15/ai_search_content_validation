@@ -276,13 +276,23 @@ ai-search-content-copilot/
 │       ├── revision_strategy_agent.py    — Layer 2: selects content-specific strategies
 │       └── content_reviser_agent.py      — Layer 2: applies strategies, evidence-grounded
 │
+├── brand_study/                      — Part 1: brand visibility study (Google organic vs AI Overviews)
+│   ├── collect.py / serpapi_client.py    — SerpApi collection with cache and budget guard
+│   ├── extract.py / labeling.py          — Brand/domain extraction and big-vs-small labeling
+│   ├── analyze.py / report.py            — Tidy CSVs and report.md
+│   ├── ollama_lifecycle.py               — Pull → use → delete helper for Ollama models
+│   └── data/                             — Query set, brand rules, label overrides
+│
+├── tests/test_brand_study/           — Offline tests with mocked SerpApi responses
+│
 ├── evaluate.py                       — CLI: automated quality checks
 ├── evaluate_baseline.py              — CLI: one-shot vs agentic comparison
 │
 ├── outputs/
-│   └── eval/                         — Saved markdown and audit files from CLI runs
+│   ├── eval/                         — Saved markdown and audit files from CLI runs
+│   └── brand_study/                  — SerpApi cache and study results (not committed)
 │
-├── .env                              — Model config (Ollama URL + model names)
+├── .env                              — Model config (Ollama URL + model names) and SERPAPI_API_KEY
 ├── .env.example
 └── requirements.txt
 ```
@@ -316,6 +326,7 @@ OLLAMA_BASE_URL=http://localhost:11434
 GENERATOR_MODEL=qwen2.5:latest
 REVIEWER_MODEL=llama3.1:8b-instruct-q4_K_M
 HF_TOKEN=          # only needed for Hugging Face backend
+SERPAPI_API_KEY=   # only needed for the brand visibility study (see below)
 ```
 
 ### Run the app
@@ -415,6 +426,139 @@ LangGraph run on same page:
 | GEO coverage before revision | 7.12 / 10 |
 | GEO coverage after 1 revision cycle | 7.25 / 10 |
 | Loop exit reason | Plateau detected (improvement 0.13 < threshold 0.5) |
+
+---
+
+## Brand Visibility Study (Part 1)
+
+A self-contained study module in `brand_study/`, separate from the GEO pipeline in `src/`. It asks one question:
+**are small/local businesses less visible than big brands in Google's organic top 10 and in Google AI Overviews?**
+It covers two sectors (coffee shops, skincare) and one location (Florida, US). The only data source is Google
+results through [SerpApi](https://serpapi.com): the organic top 10, the AI Overview (AIO) and, for description
+only, the local pack.
+
+### Design
+
+| Step | Module | What it does |
+|---|---|---|
+| Queries | `data/queries_v1.csv`, `queries.py` | 50 versioned queries (25 coffee, 25 skincare), broad and Florida-local, over Miami, Tampa, Orlando, Jacksonville, St. Petersburg and Fort Lauderdale. Broad queries use `location=Florida,United States`, and local queries use the city. Ids are never reused: if a query's text changes, it gets a new id |
+| Collection | `collect.py`, `serpapi_client.py`, `cache.py`, `budget.py` | `engine=google`, `gl=us`, `hl=en`, desktop, `no_cache=true`. When the AIO comes back only as a `page_token`, the `google_ai_overview` follow-up is made immediately, because the token expires within about a minute. Every raw response is cached under `outputs/brand_study/raw/<run>/` |
+| Extraction | `extract.py`, `domains.py`, `entities.py` | Organic domains with rank, AIO cited sources, AIO brand mentions and local-pack places. Domains are normalised (`www.`/`m.` stripped, Google redirects unwrapped, hosting-platform subdomains such as `*.square.site` kept whole) |
+| Labeling | `labeling.py`, `data/brand_rules_v1.csv`, `data/label_overrides.csv` | Transparent rules plus your overrides |
+| Analysis | `analyze.py`, `report.py` | Tidy CSVs plus `report.md` in `outputs/brand_study/results/` |
+
+SerpApi field names and billing facts, with sources, are recorded in `brand_study/SERPAPI_NOTES.md`.
+
+### Categories and the big-vs-small test
+
+| Category | Meaning |
+|---|---|
+| `big_brand` | National or global chains and brands, including national service chains |
+| `small_local` | Small or independent businesses. For local queries: independent local businesses, including Florida-only chains. For broad product queries: small or independent brands |
+| `marketplace_retailer` | Amazon, Walmart, Target, Sephora, Ulta, CVS, delivery apps, Google Shopping panels cited by AIOs (`shopping.google.com`) and similar |
+| `directory_media_other` | Yelp, Tripadvisor, Reddit, social media, publishers, `.gov`/`.edu` |
+| `not_a_brand` | Ingredients and attributes (retinol, wifi, ...). Excluded from headline numbers |
+| `unknown` | Not labeled yet. Never silently counted as small: it appears in the bounds and the unresolved share |
+
+A brand or business is `big_brand` if **any** of these holds, and `small_local` only if none does:
+**(a) ownership:** it is majority-owned by a public company or a multinational group;
+**(b) distribution:** it is sold nationally through major US retailers;
+**(c) footprint:** it has locations in several US states or franchises nationally.
+Each seeded `big_brand` rule records which criterion applies in its `basis` column.
+
+Label precedence: override → exact domain rule → parent-domain rule → name rule → hosting-platform heuristic
+(`small_local`) → `.gov`/`.edu` (`directory_media_other`) → `unknown`. Brand names that are also common words
+have an `ambiguous` mode in the rule file:
+- `case`: case-sensitive match ("The Ordinary" matches, "an ordinary moisturizer" does not);
+- `case_mid`: case-sensitive, and not at the start of a sentence, list item, heading or cell ("sold at Target" matches, "Target dark spots" does not);
+- `candidate`: produces an unconfirmed candidate only (a lone "illy"). Only an override can confirm it.
+
+An AIO mention is *confirmed* by a dictionary match, by a name rule or override, or by matching a local-pack
+business for the same query (`local_pack_name`). Unconfirmed candidates are left out of the point estimate but
+are counted in the bounds.
+
+### Setup
+
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+# put SERPAPI_API_KEY=... in .env or the shell; the key is never printed, logged or cached
+python -m pytest tests -q      # offline; no network is used in the tests
+```
+
+### Steps
+
+All commands run from `ai-search-content-copilot/`.
+
+1. `python -m brand_study check-queries`: validates the query file and prints counts.
+2. `python -m brand_study account`: shows the remaining searches (free Account API).
+3. `python -m brand_study collect --run run1 --dry-run`: shows the plan, the study total so far, the cap and the estimate. Spends nothing.
+4. `python -m brand_study collect --run run1`: asks for confirmation, then collects. Add `--yes` for non-interactive use.
+5. At least 12–24 h later: `python -m brand_study collect --run run2`. It refuses to start within 12 h of run1 unless you pass `--force-spacing`.
+6. `python -m brand_study analyze`. The first pass is a **labeling pass**, so expect a PROVISIONAL banner.
+7. Open `outputs/brand_study/results/labels_to_review.csv`. Copy the corrections you agree with into `brand_study/data/label_overrides.csv` (`key_type,key,category,note`). Suggestions (`small_local` for local-pack websites and names, `not_a_brand` for ingredient-like headings) are never applied automatically. An AIO product name (for example "Minimalist 10% Vitamin B5 Gel Face Moisturizer") appears under its full normalised key. Either override that key, or add a `name` rule for the brand to `brand_rules_v1.csv`, so that every product from that brand is matched.
+8. Re-run `analyze` until the banner clears or the bounds are tight enough.
+9. `python -m brand_study scan-leaks`: checks the output folder for the API key. It prints file names and a count only.
+
+Useful `collect` options: `--sector`, `--query-ids a,b`, `--limit N`, `--max-new N` (hard limit for this
+invocation), `--retries` (default 1), `--retry-failed-aio --query-ids ...` (re-requests cached searches whose AIO
+follow-up failed, and moves the old files to `_superseded/`).
+
+### Cost in SerpApi searches
+
+| What | SerpApi searches |
+|---|---|
+| Account API, `--dry-run`, `analyze`, `check-queries`, `scan-leaks` | 0 |
+| Each run | 50 main searches plus at most 50 AIO follow-ups. The guard plans for this plus 10 retry headroom (≤ 110) |
+| Full study (2 runs) | ≤ 200 in the normal worst case, ≤ 220 with retry headroom, against a study-wide cap of 300 |
+| `--retry-failed-aio` | ≤ 2 attempts per main search and ≤ 2 per follow-up for each listed query, within the same cap |
+| Smoke test | ≤ 4 (`--max-new 4 --retries 0`) |
+| Hard guarantee | Ledger attempts never exceed `--study-cap` or the account's remaining searches |
+
+How the budget works:
+- `--study-cap` (default 300, env `BRAND_STUDY_CAP`) covers the **whole study**: every run, including smoke tests and earlier invocations. It is counted from `outputs/brand_study/ledger.jsonl`, which has one line per HTTP attempt. Every attempt counts as spent, even when SerpApi probably did not bill it.
+- Before collecting, the free Account API is called. A run is refused if the estimate is above the cap or above the remaining searches. During the run, each attempt is charged before it is sent, and a main search starts only if one search is left over for its possible follow-up.
+- A cached `(run, query, request)` is never re-requested. Failed main searches are not cached, so they can be retried. Failed AIO follow-ups *are* cached as failures, because their token has already expired.
+- After a run, the summary shows logical requests, attempts, retries and the Account API usage delta.
+
+### Outputs
+
+`outputs/brand_study/results/` holds `query_status.csv`, `organic_results.csv`, `aio_references.csv`,
+`aio_mentions.csv`, `local_pack.csv`, `summary_by_segment.csv` (long format, with `bound_low`, `bound_high`,
+`unresolved_share` and `provisional`), `overlap_by_query.csv`, `stability_by_query.csv` (Jaccard run1 vs run2),
+`labels_to_review.csv` and `report.md`. Everything under `outputs/brand_study/` is ignored by Git.
+
+### Limitations
+
+- **Observational only:** one geography, specific points in time, SerpApi's simulated location and device, and no login or personalisation. AI Overviews are non-deterministic, and cells are small (10–25 queries), so CIs are wide.
+- Domain-level labels undercount small businesses, which appear mostly inside directories, listicles and the local pack. Cited pages are not scraped.
+- Before labels are reviewed, the small-business share of AIO mentions is biased down. The bounds show how far it could move, and the upper bound is loose.
+- Social profiles are labeled as directories, even when they belong to a small business.
+- Mention detection is dictionary-based plus list-title candidates.
+
+### Ollama model lifecycle helper (for Part 2)
+
+`brand_study/ollama_lifecycle.py` downloads a model just before use and deletes it afterwards, to save space on
+the shared disk:
+
+```python
+from brand_study import config
+from brand_study.ollama_lifecycle import ollama_model
+
+with ollama_model(config.REWRITER_MODEL) as tag:
+    ...  # use the model through OLLAMA_BASE_URL
+# deleted here, also after errors, Ctrl+C and SIGTERM
+```
+
+Safety rules:
+- **A model that was already present is never deleted.** Only a model the helper pulled itself in this run is removed.
+- Before pulling, it checks free disk space at the models directory and refuses if less than the margin (default 10 GB) would remain. If a models folder doesn't exist yet or can't be read, it measures the nearest existing parent folder instead, which may be on a different filesystem. On a shared server, set `BRAND_STUDY_OLLAMA_MODELS_DIR` to the server's models directory so the right disk is checked. If no directory can be checked, it refuses unless `allow_unknown_disk=True`.
+- It reports free GPU memory with `nvidia-smi` and warns loudly when it is below 24 GB, for example because another job holds about 20 GB. Pass `strict_gpu=True` to refuse instead.
+- It deletes through the HTTP API (`DELETE /api/delete`). If that fails and the model is still listed, it falls back to `ollama rm`, with `OLLAMA_HOST` derived from `OLLAMA_BASE_URL` (this overrides any inherited `OLLAMA_HOST`). If no CLI host can be derived (a proxy path prefix, or credentials in the URL), the fallback is disabled and the exact manual command is printed.
+- Limits: if someone else pulls the same tag during your run, it is deleted too. On a remote server, the disk and GPU checks describe this machine only.
+
+Part 2 model tags (not verified yet): the rewriter is `gemma4:31b` (env `STUDY_REWRITER_MODEL`), and the judge is a
+**placeholder** (`STUDY_JUDGE_MODEL`, which must be set to the real Qwen 3.x 27B tag). The helper refuses
+placeholder tags.
 
 ---
 

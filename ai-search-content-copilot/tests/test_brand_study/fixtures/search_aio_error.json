@@ -1,0 +1,23 @@
+{
+ "search_metadata": {
+  "id": "fake_search_id_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "x"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://www.amazon.com/coffee",
+   "displayed_link": "https://www.amazon.com/coffee",
+   "snippet": "...",
+   "source": "www.amazon.com"
+  }
+ ],
+ "ai_overview": {
+  "error": "An AI Overview is not available."
+ }
+}
