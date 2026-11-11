@@ -276,13 +276,23 @@ ai-search-content-copilot/
 │       ├── revision_strategy_agent.py    — Layer 2: selects content-specific strategies
 │       └── content_reviser_agent.py      — Layer 2: applies strategies, evidence-grounded
 │
+├── brand_study/                      — Part 1: brand visibility study (Google organic vs AI Overviews)
+│   ├── collect.py / serpapi_client.py    — SerpApi collection with cache and budget guard
+│   ├── extract.py / labeling.py          — Brand/domain extraction and big-vs-small labeling
+│   ├── analyze.py / report.py            — Tidy CSVs and report.md
+│   ├── ollama_lifecycle.py               — Pull → use → delete helper for Ollama models
+│   └── data/                             — Query set, brand rules, label overrides
+│
+├── tests/test_brand_study/           — Offline tests with mocked SerpApi responses
+│
 ├── evaluate.py                       — CLI: automated quality checks
 ├── evaluate_baseline.py              — CLI: one-shot vs agentic comparison
 │
 ├── outputs/
-│   └── eval/                         — Saved markdown and audit files from CLI runs
+│   ├── eval/                         — Saved markdown and audit files from CLI runs
+│   └── brand_study/                  — SerpApi cache and study results (not committed)
 │
-├── .env                              — Model config (Ollama URL + model names)
+├── .env                              — Model config (Ollama URL + model names) and SERPAPI_API_KEY
 ├── .env.example
 └── requirements.txt
 ```
@@ -316,6 +326,7 @@ OLLAMA_BASE_URL=http://localhost:11434
 GENERATOR_MODEL=qwen2.5:latest
 REVIEWER_MODEL=llama3.1:8b-instruct-q4_K_M
 HF_TOKEN=          # only needed for Hugging Face backend
+SERPAPI_API_KEY=   # only needed for the brand visibility study (see below)
 ```
 
 ### Run the app

@@ -252,9 +252,62 @@ Runs one-shot LLM and full agentic pipeline on the same URL, scores both with th
 
 ---
 
+## Brand Visibility Study (Part 1)
+
+An observational study in `ai-search-content-copilot/brand_study/` that measures whether **small/local businesses are less visible than big brands** in Google's organic top 10 and in **Google AI Overviews**.
+
+- **Queries:** 50 commercial questions, 25 about coffee shops and 25 about skincare, mixing broad and local queries across Florida cities
+- **Data:** Google organic top 10 and AI Overviews via [SerpApi](https://serpapi.com), 2 runs per query collected at different times, with every response cached on disk
+- **Labels:** each brand or domain is labelled big brand, small/local business, marketplace/retailer, or directory/review/media. The labels are rule-based, and you can correct them in an overrides CSV
+- **Results:**
+  - big vs small visibility per sector and query type
+  - overlap between AI Overview citations and the organic top 10
+  - the share of queries with an AI Overview
+  - run-to-run stability
+- **Cost control:** a budget guard and a dry run (`--dry-run`). One full run is at most about 110 searches
+
+```bash
+cd ai-search-content-copilot
+python3 -m brand_study collect --run run1 --dry-run   # what it would spend (0 searches)
+python3 -m brand_study collect --run run1             # later: --run run2
+python3 -m brand_study analyze                        # CSVs + report.md (0 searches)
+```
+
+It also includes an **Ollama model lifecycle helper** for Part 2. It downloads a model, uses it, and then deletes it, so it doesn't fill the shared disk.
+
+The full documentation is in [ai-search-content-copilot/README.md](ai-search-content-copilot/README.md#brand-visibility-study-part-1).
+
+---
+
+## Agent Development Workflow
+
+[`agent_workflow/`](agent_workflow/README.md) runs the Claude Code and Codex CLIs as a build team:
+
+```
+Planner ──▶ Plan reviewer        (up to 5 rounds until approved)
+Implementer ──▶ Code reviewer    (up to 5 rounds until approved)
+```
+
+- Before a run starts, it asks which tool, model and thinking effort each role uses.
+- Reviewers can only read files.
+- When it hits a usage limit, it waits for the reset and continues.
+- It never commits.
+
+`brand_study` was built with this workflow. The task and the approved plan are in `agent_workflow/tasks/`.
+
+```bash
+python3 agent_workflow/orchestrate.py --workdir ai-search-content-copilot
+```
+
+---
+
 ## Repository Structure
 
 ```
+agent_workflow/                       — Plan → review → implement → review orchestrator (Claude Code / Codex)
+│   ├── orchestrate.py
+│   └── tasks/                        — Task briefs and approved plans
+│
 ai-search-content-copilot/
 │
 ├── app/
@@ -276,13 +329,23 @@ ai-search-content-copilot/
 │       ├── revision_strategy_agent.py    — Layer 2: selects content-specific strategies
 │       └── content_reviser_agent.py      — Layer 2: applies strategies, evidence-grounded
 │
+├── brand_study/                      — Part 1: brand visibility study (Google organic vs AI Overviews)
+│   ├── collect.py / serpapi_client.py    — SerpApi collection with cache and budget guard
+│   ├── extract.py / labeling.py          — Brand/domain extraction and big-vs-small labeling
+│   ├── analyze.py / report.py            — Tidy CSVs and report.md
+│   ├── ollama_lifecycle.py               — Pull → use → delete helper for Ollama models
+│   └── data/                             — Query set, brand rules, label overrides
+│
+├── tests/test_brand_study/           — Offline tests with mocked SerpApi responses
+│
 ├── evaluate.py                       — CLI: automated quality checks
 ├── evaluate_baseline.py              — CLI: one-shot vs agentic comparison
 │
 ├── outputs/
-│   └── eval/                         — Saved markdown and audit files from CLI runs
+│   ├── eval/                         — Saved markdown and audit files from CLI runs
+│   └── brand_study/                  — SerpApi cache and study results (not committed)
 │
-├── .env                              — Model config (Ollama URL + model names)
+├── .env                              — Model config (Ollama URL + model names) and SERPAPI_API_KEY
 ├── .env.example
 └── requirements.txt
 ```
@@ -316,6 +379,7 @@ OLLAMA_BASE_URL=http://localhost:11434
 GENERATOR_MODEL=qwen2.5:latest
 REVIEWER_MODEL=llama3.1:8b-instruct-q4_K_M
 HF_TOKEN=          # only needed for Hugging Face backend
+SERPAPI_API_KEY=   # only needed for the brand visibility study
 ```
 
 ### Run the app
