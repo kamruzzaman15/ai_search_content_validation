@@ -38,3 +38,16 @@ def test_lock(tmp_path):
 def test_invalid_kind(tmp_path):
     with pytest.raises(ValueError):
         cache.cache_path("run1", "q1", "other", tmp_path)
+
+
+def test_lock_label(tmp_path):
+    lock = tmp_path / ".llm_label.lock"
+    with cache.CollectLock(lock, what="llm-label"):
+        with pytest.raises(cache.LockHeld) as e:
+            with cache.CollectLock(lock, what="llm-label"):
+                pass
+    assert "another llm-label seems to be running" in str(e.value) and str(lock) in str(e.value)
+    with cache.CollectLock(lock):
+        with pytest.raises(cache.LockHeld, match="another collect seems to be running"):
+            with cache.CollectLock(lock):
+                pass

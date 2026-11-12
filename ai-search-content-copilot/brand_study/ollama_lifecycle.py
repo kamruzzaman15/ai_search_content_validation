@@ -70,6 +70,16 @@ class OllamaAPI:
                     names.add(normalize_tag(m[k]))
         return names
 
+    def model_digest(self, tag: str) -> str:
+        """Digest of an installed model from /api/tags ('' if not listed)."""
+        r = self.session.get(f"{self.base_url}/api/tags", timeout=self.timeout)
+        r.raise_for_status()
+        want = normalize_tag(tag)
+        for m in r.json().get("models", []) or []:
+            if any(m.get(k) and normalize_tag(m[k]) == want for k in ("name", "model")):
+                return str(m.get("digest") or "")
+        return ""
+
     def pull(self, tag: str, log: Callable = print) -> None:
         r = self.session.post(f"{self.base_url}/api/pull", json={"model": tag, "name": tag, "stream": True},
                               stream=True, timeout=self.PULL_TIMEOUT)

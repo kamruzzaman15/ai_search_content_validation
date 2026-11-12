@@ -32,7 +32,53 @@ LIMITATIONS = [
     "through list titles or the local pack.",
     "Broad product queries use 'small/independent brand' and local queries use 'independent local business'. "
     "Results are split by query_type for this reason.",
+    "Optional LLM labels (three judges, accepted only when all agree) fill gaps the rules leave. LLMs may favour "
+    "global brands over local ones; the judges' accuracy and a pre-specified big-brand bias test come from a "
+    "small blinded human sample (default 50 items), so their confidence intervals are wide.",
 ]
+
+ORIGINS = ("rules", "human", "llm", "llm_confirm", "unlabeled")
+
+
+def label_origin(src) -> str:
+    s = str(src or "")
+    if s.startswith("local_pack_website:"):
+        s = s.split(":", 1)[1]
+    if s in ("", "none", "unconfirmed", "nan"):
+        return "unlabeled"
+    if s == "override":
+        return "human"
+    if s.startswith("llm_"):
+        return "llm_confirm" if s.endswith("_confirm") else "llm"
+    return "rules"
+
+
+def origin_table(frames: dict) -> tuple[pd.DataFrame, Counter]:
+    rows, total = [], Counter()
+    for surface, name in (("organic", "organic_results"), ("aio_reference", "aio_references"),
+                          ("aio_mention", "aio_mentions"), ("local_pack", "local_pack")):
+        df = frames.get(name)
+        c = Counter()
+        if df is not None and not df.empty and "label_source" in df:
+            c.update(label_origin(x) for x in df["label_source"])
+        total.update(c)
+        rows.append({"surface": surface, **{o: c.get(o, 0) for o in ORIGINS}, "rows": sum(c.values())})
+    rows.append({"surface": "total", **{o: total.get(o, 0) for o in ORIGINS}, "rows": sum(total.values())})
+    return pd.DataFrame(rows), total
+
+
+def llm_share_sentence(total: Counter, llm_meta: dict | None = None) -> str:
+    llm_meta = llm_meta or {}
+    labeled = sum(v for k, v in total.items() if k != "unlabeled")
+    all_rows = sum(total.values())
+    from_llm = total.get("llm", 0) + total.get("llm_confirm", 0)
+
+    def pct(k, n):
+        return f"{100 * k / n:.1f}%" if n else "n/a"
+    return (f"{pct(from_llm, labeled)} of labeled rows ({pct(from_llm, all_rows)} of all rows) came from the LLM "
+            f"judges: {pct(total.get('llm', 0), labeled)} labelled by the LLM and {pct(total.get('llm_confirm', 0), labeled)} "
+            f"rule categories confirmed by the LLM (policy: {llm_meta.get('policy') or 'n/a'}, prompt "
+            f"{llm_meta.get('prompt_version') or 'n/a'}).")
 
 METHOD_NOTES = [
     "The headline unit is the distinct root domain per query (organic, AIO references), or the distinct confirmed "
@@ -148,6 +194,7 @@ def main_table(summary: pd.DataFrame, surface: str, segments) -> pd.DataFrame:
 
 def build_report(frames: dict, runs, *, queries_file: str = "queries_v1.csv", ledger_rows: list[dict] | None = None,
                  overrides_count: int = 0, threshold: float = config.DEFAULT_PROVISIONAL_THRESHOLD,
+                 llm_overrides_count: int = 0, llm_meta: dict | None = None,
                  field_verification: str = "documentation (see brand_study/SERPAPI_NOTES.md) and live smoke-test "
                                            "responses") -> str:
     summary = frames["summary_by_segment"]
@@ -185,6 +232,24 @@ def build_report(frames: dict, runs, *, queries_file: str = "queries_v1.csv", le
             f"{r.run}/{r.query_id} (old {r.supersedes}, new {r.collected_at})" for r in sup.itertuples()))
     out.append(f"- Field names verified against: {field_verification}\n")
     out.append(DISCLAIMER + "\n")
+    llm_meta = llm_meta or {}
+    if llm_overrides_count > 0:
+        # Count what was actually applied, not the rows in the file: items that later got a human override (or a rule)
+        # still sit in llm_label_overrides.csv until `llm-label --aggregate-only` is re-run, but they never win.
+        _, tot = origin_table(frames)
+        applied = tot.get("llm", 0) + tot.get("llm_confirm", 0)
+        note = (f"**LLM labels: {llm_overrides_count} LLM labels for domains/entities the rules left unknown were "
+                f"loaded from three LLM judges (accepted only under the `{llm_meta.get('policy') or 'unanimous'}` "
+                f"policy; human overrides and rules always win), and they decided the label of {applied} rows in "
+                f"this report. LLMs may favour global brands over local ones, so these labels can share a big-brand "
+                f"bias.")
+        if llm_meta.get("validation_summary"):
+            note += f" Validation (`llm_validation.md`): {llm_meta['validation_summary']}"
+        else:
+            note += " See `llm_validation.md` (run `llm-sample` and `llm-agreement`) for their measured accuracy."
+        if llm_meta.get("runs_note"):
+            note += f" {llm_meta['runs_note']}"
+        out.append(note + "**\n")
 
     out.append("## Category definitions\n")
     for cat in config.CATEGORIES:
@@ -284,6 +349,14 @@ def build_report(frames: dict, runs, *, queries_file: str = "queries_v1.csv", le
     n_sug = int((review["suggested_category"] != "").sum()) if not review.empty else 0
     out.append("- Label sources: " + (", ".join(f"{k}={v}" for k, v in src.most_common()) or "none"))
     out.append(f"- Manual overrides loaded: {overrides_count}")
+    out.append(f"- LLM labels loaded (`llm_label_overrides.csv`): {llm_overrides_count}")
+    otab, ototal = origin_table(frames)
+    out.append("- Label origin by surface (rows): rules, human overrides, LLM labels, rule categories confirmed by "
+               "the LLM, unlabeled\n")
+    out.append(md_table(otab) + "\n")
+    out.append("- " + llm_share_sentence(ototal, llm_meta))
+    if llm_meta.get("runs_note"):
+        out.append(f"- WARNING: {llm_meta['runs_note']}")
     out.append(f"- Items in `labels_to_review.csv`: {len(review)} ({n_sug} with a suggestion, never applied "
                f"automatically)\n")
 

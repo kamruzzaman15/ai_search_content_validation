@@ -7,7 +7,8 @@ import pandas as pd
 
 from brand_study import budget as bud
 from brand_study import config, extract
-from brand_study.labeling import Labeler, build_review_table, label_domain_frame, label_mentions
+from brand_study.labeling import (Labeler, apply_llm_fallback_domains, build_review_table, label_domain_frame,
+                                  label_mentions)
 
 SURFACES = ("organic", "aio_reference", "aio_mention")
 BOUND_CATEGORIES = ("big_brand", "small_local")
@@ -87,6 +88,10 @@ def build_frames(queries, runs, labeler: Labeler, root: Path | None = None,
             cat, ent, src = labeler.label_entity(r["title"], sectors.get((r["run"], r["query_id"])))
             if cat != "unknown":
                 local_df.loc[i, ["category", "entity", "label_source"]] = [cat, ent, src]
+    # LLM labels last: only rows still unknown after every rule and human-override path (incl. the title fallback)
+    organic_df = apply_llm_fallback_domains(organic_df, labeler)
+    refs_df = apply_llm_fallback_domains(refs_df, labeler)
+    local_df = apply_llm_fallback_domains(local_df, labeler, entity_col="title")
     mentions_df = label_mentions(pd.DataFrame(mentions, columns=[
         "run", "query_id", "entity", "entity_norm", "methods", "block_types", "local_pack_match_domain"]),
         labeler, sectors)

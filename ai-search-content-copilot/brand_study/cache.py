@@ -76,8 +76,9 @@ class LockHeld(Exception):
 
 
 class CollectLock:
-    def __init__(self, path: Path | None = None):
+    def __init__(self, path: Path | None = None, what: str = "collect"):
         self.path = path or config.lock_path()
+        self.what = what
         self._held = False
 
     def __enter__(self):
@@ -86,8 +87,8 @@ class CollectLock:
             fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
         except FileExistsError:
             raise LockHeld(
-                f"another collect seems to be running (lock {self.path}). "
-                f"If no collect is running, delete that file and retry."
+                f"another {self.what} seems to be running (lock {self.path}). "
+                f"If no {self.what} is running, delete that file and retry."
             )
         with os.fdopen(fd, "w") as f:
             f.write(json.dumps({"pid": os.getpid(), "started": utc_now(), "t": time.time()}))

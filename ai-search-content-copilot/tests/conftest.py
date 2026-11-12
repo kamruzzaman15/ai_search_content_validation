@@ -1,4 +1,5 @@
 from __future__ import annotations
+import hashlib
 import socket
 import sys
 from pathlib import Path
@@ -34,3 +35,34 @@ def _isolated_env(monkeypatch, tmp_path):
     out = tmp_path / "out"
     monkeypatch.setenv("BRAND_STUDY_OUTPUT_DIR", str(out))
     yield out
+
+
+def _file_state(p: Path):
+    if not p.exists():
+        return None
+    data = p.read_bytes()
+    st = p.stat()
+    return (st.st_size, st.st_mtime_ns, hashlib.sha256(data).hexdigest())
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _guard_real_llm_overrides():
+    """Tests must never create or modify the real generated LLM labels file."""
+    from brand_study import config
+    before = _file_state(config.DEFAULT_LLM_OVERRIDES)
+    yield
+    assert _file_state(config.DEFAULT_LLM_OVERRIDES) == before, "tests touched brand_study/data/llm_label_overrides.csv"
+
+
+@pytest.fixture(autouse=True)
+def _isolated_llm(monkeypatch, tmp_path):
+    import brand_study.llm_judges as lj
+
+    def no_subprocess(*a, **k):
+        raise RuntimeError("subprocess disabled in tests; inject a runner")
+
+    monkeypatch.setenv("BRAND_STUDY_LLM_OVERRIDES", str(tmp_path / "llm_label_overrides.csv"))
+    monkeypatch.setattr(lj, "_default_runner", no_subprocess)
+    for var in ("CLAUDE_BIN", "BRAND_STUDY_GEMMA_TAG", "BRAND_STUDY_QWEN_TAG", "BRAND_STUDY_CLAUDE_MODEL"):
+        monkeypatch.delenv(var, raising=False)
+    yield tmp_path / "llm_label_overrides.csv"
