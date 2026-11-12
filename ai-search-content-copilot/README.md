@@ -445,6 +445,7 @@ only, the local pack.
 | Collection | `collect.py`, `serpapi_client.py`, `cache.py`, `budget.py` | `engine=google`, `gl=us`, `hl=en`, desktop, `no_cache=true`. When the AIO comes back only as a `page_token`, the `google_ai_overview` follow-up is made immediately, because the token expires within about a minute. Every raw response is cached under `outputs/brand_study/raw/<run>/` |
 | Extraction | `extract.py`, `domains.py`, `entities.py` | Organic domains with rank, AIO cited sources, AIO brand mentions and local-pack places. Domains are normalised (`www.`/`m.` stripped, Google redirects unwrapped, hosting-platform subdomains such as `*.square.site` kept whole) |
 | Labeling | `labeling.py`, `data/brand_rules_v1.csv`, `data/label_overrides.csv` | Transparent rules plus your overrides |
+| LLM labeling (optional) | `llm_evidence.py`, `llm_judges.py`, `llm_aggregate.py`, `llm_validation.py`, `data/llm_label_overrides.csv` (generated) | Three independent LLM judges label what the rules leave `unknown`. Only unanimous labels are used, disagreements go to you, and a blinded human sample measures the judges' accuracy and big-brand bias (see [LLM labeling](#llm-labeling-optional-after-the-last-collection-run)) |
 | Analysis | `analyze.py`, `report.py` | Tidy CSVs plus `report.md` in `outputs/brand_study/results/` |
 
 SerpApi field names and billing facts, with sources, are recorded in `brand_study/SERPAPI_NOTES.md`.
@@ -467,7 +468,8 @@ A brand or business is `big_brand` if **any** of these holds, and `small_local` 
 Each seeded `big_brand` rule records which criterion applies in its `basis` column.
 
 Label precedence: override → exact domain rule → parent-domain rule → name rule → hosting-platform heuristic
-(`small_local`) → `.gov`/`.edu` (`directory_media_other`) → `unknown`. Brand names that are also common words
+(`small_local`) → `.gov`/`.edu` (`directory_media_other`) → LLM label (optional, only for rows still unknown after
+every rule and override path) → `unknown`. Brand names that are also common words
 have an `ambiguous` mode in the rule file:
 - `case`: case-sensitive match ("The Ordinary" matches, "an ordinary moisturizer" does not);
 - `case_mid`: case-sensitive, and not at the start of a sentence, list item, heading or cell ("sold at Target" matches, "Target dark spots" does not);
@@ -494,10 +496,11 @@ All commands run from `ai-search-content-copilot/`.
 3. `python -m brand_study collect --run run1 --dry-run`: shows the plan, the study total so far, the cap and the estimate. Spends nothing.
 4. `python -m brand_study collect --run run1`: asks for confirmation, then collects. Add `--yes` for non-interactive use.
 5. At least 12–24 h later: `python -m brand_study collect --run run2`. It refuses to start within 12 h of run1 unless you pass `--force-spacing`.
-6. `python -m brand_study analyze`. The first pass is a **labeling pass**, so expect a PROVISIONAL banner.
-7. Open `outputs/brand_study/results/labels_to_review.csv`. Copy the corrections you agree with into `brand_study/data/label_overrides.csv` (`key_type,key,category,note`). Suggestions (`small_local` for local-pack websites and names, `not_a_brand` for ingredient-like headings) are never applied automatically. An AIO product name (for example "Minimalist 10% Vitamin B5 Gel Face Moisturizer") appears under its full normalised key. Either override that key, or add a `name` rule for the brand to `brand_rules_v1.csv`, so that every product from that brand is matched.
-8. Re-run `analyze` until the banner clears or the bounds are tight enough.
-9. `python -m brand_study scan-leaks`: checks the output folder for the API key. It prints file names and a count only.
+6. Optional, after the **last** collection run: label the remaining unknowns with three LLM judges (see [LLM labeling](#llm-labeling-optional-after-the-last-collection-run)).
+7. `python -m brand_study analyze`. The first pass is a **labeling pass**, so expect a PROVISIONAL banner.
+8. Open `outputs/brand_study/results/labels_to_review.csv`. Copy the corrections you agree with into `brand_study/data/label_overrides.csv` (`key_type,key,category,note`). Suggestions (`small_local` for local-pack websites and names, `not_a_brand` for ingredient-like headings) are never applied automatically. An AIO product name (for example "Minimalist 10% Vitamin B5 Gel Face Moisturizer") appears under its full normalised key. Either override that key, or add a `name` rule for the brand to `brand_rules_v1.csv`, so that every product from that brand is matched.
+9. Re-run `analyze` until the banner clears or the bounds are tight enough.
+10. `python -m brand_study scan-leaks`: checks the output folder for the API key. It prints file names and a count only.
 
 Useful `collect` options: `--sector`, `--query-ids a,b`, `--limit N`, `--max-new N` (hard limit for this
 invocation), `--retries` (default 1), `--retry-failed-aio --query-ids ...` (re-requests cached searches whose AIO
@@ -526,6 +529,9 @@ How the budget works:
 `aio_mentions.csv`, `local_pack.csv`, `summary_by_segment.csv` (long format, with `bound_low`, `bound_high`,
 `unresolved_share` and `provisional`), `overlap_by_query.csv`, `stability_by_query.csv` (Jaccard run1 vs run2),
 `labels_to_review.csv` and `report.md`. Everything under `outputs/brand_study/` is ignored by Git.
+The optional LLM step adds `llm_disagreements.csv`, `llm_validation_sample.csv`, `llm_validation.md` and
+`llm_validation_overrides_snippet.csv` to `results/`, its cache under `outputs/brand_study/llm_labels/`, and the
+generated `brand_study/data/llm_label_overrides.csv` (tracked, so the labels used are reviewable).
 
 ### Limitations
 
@@ -534,6 +540,82 @@ How the budget works:
 - Before labels are reviewed, the small-business share of AIO mentions is biased down. The bounds show how far it could move, and the upper bound is loose.
 - Social profiles are labeled as directories, even when they belong to a small business.
 - Mention detection is dictionary-based plus list-title candidates.
+- Optional LLM labels can share the LLMs' preference for global brands over local ones. Their accuracy and the bias test rest on a small blinded human sample (default 50 items), so the confidence intervals are wide. See [LLM labeling](#llm-labeling-optional-after-the-last-collection-run).
+
+### LLM labeling (optional, after the last collection run)
+
+After the rules and your overrides, some domains and entities are still `unknown` (298 after run1: 283 domains
+and 15 entities). `llm-label` asks three independent judges to classify each one, with one shared prompt that
+contains the study's category definitions and the big-vs-small operational test:
+
+| Judge | Backend | Model |
+|---|---|---|
+| `gemma` | Ollama, downloaded before use and deleted afterwards | `gemma4:31b` (about 20.4 GB) |
+| `qwen` | Ollama, downloaded before use and deleted afterwards | `qwen3.8:27b` (about 17.7 GB) |
+| `claude` | Claude Code CLI in print mode, high effort, no tools | `claude-opus-5-5` |
+
+The two Ollama tags were verified in the Ollama registry on 2026-11-10. Override them with `BRAND_STUDY_GEMMA_TAG` /
+`BRAND_STUDY_QWEN_TAG` (and the Claude model with `BRAND_STUDY_CLAUDE_MODEL`). The Part 2 `JUDGE_MODEL` setting is
+separate and unchanged.
+
+**How it works**
+
+- **Evidence, not names.** Small businesses are mostly unknown to LLMs, so each item gets an evidence record from data already collected: example URLs, titles and snippets, the queries, sectors and surfaces it appeared in, local-pack places and AIO text. With `--fetch` (the default), each selected domain's homepage is fetched once: the title, meta description and up to 1,500 characters of visible text. The fetch uses a timeout, a clear User-Agent, at most 3 manual redirects with a public-IP check on every hop, no retries and no robots.txt check, and it is cached under `llm_labels/fetch/`. Failures are recorded and are not fatal. Scraped text is passed to the judges as clearly delimited, untrusted data.
+- **Judges are independent** and never see each other's answers. Items go in batches of 12. Each answer is strict JSON (`category`, `confidence`, one-sentence `reason`). A malformed batch is retried once for the bad items, and anything still invalid is recorded as an abstention. The Ollama models run at temperature 0, one after the other; a model is only pulled when it has pending work. Claude runs from an empty temporary directory outside the repository with `--tools ""` and the isolation flags the installed CLI supports (probed from `--help` and recorded on every vote). On a usage limit it waits until the stated reset time (or polls every 15 minutes, at most 6 hours per wait) and retries. A generic rate-limit, quota or HTTP 429 message that states no reset time is retried for at most 24 polls (about 6 hours) and then stops the run with an error, so a persistent non-limit failure cannot stall it for days.
+- **Caching and resume.** Every answer is stored in `llm_labels/votes_<judge>.jsonl`, keyed by judge, model, prompt version, item and evidence hash, so a rerun skips finished work and an interrupted run resumes.
+- **Aggregation.** 3 of 3 agreeing (not `unknown`) → accepted into the generated `brand_study/data/llm_label_overrides.csv` (`key_type,key,category,note`, with the votes in the note; do not edit it). Anything else (2 of 3, no majority, an abstention, or a conflict with a candidate rule) → `results/llm_disagreements.csv` with all votes, confidences and reasons, for you to resolve **by adding rows to `label_overrides.csv`**. `--accept majority` also accepts 2-of-3 labels.
+- **Precedence: human override > rules > LLM fallback.** An LLM label only fills a row that is still `unknown` after every rule and override path, so it never beats a rule or a human label. For the items the LLM step labels (which the rules leave unknown), this gives the same result as "human > LLM > rules". The report's "Labeling coverage" section shows how many rows came from rules, human overrides and the LLM judges, and states the LLM share. An LLM label can also confirm a candidate-only AIO mention whose rule category it matches; this is reported separately (`llm_confirm`).
+
+**Steps** (from `ai-search-content-copilot/`, after the last collection run)
+
+1. `python -m brand_study llm-label --fetch-only` — fetch the homepages (about 5–10 min) and write `llm_labels/items.jsonl`. Like every live `llm-label` run, it asks for confirmation before the first request (`--yes` for non-interactive use).
+2. `python -m brand_study llm-label --dry-run` — counts per judge, pull status, Claude flags, and `llm_labels/dry_run_prompt.txt`. Calls no model.
+3. `python -m brand_study llm-label` — runs gemma → qwen → claude and aggregates. Asks for confirmation before any homepage request or model call (`--yes` for non-interactive use). When Claude has pending work, the Claude CLI is located and probed before that prompt, so the plan shows its isolation flags and a missing or unsuitable CLI stops the run before any fetch or Ollama download. Useful options: `--judges claude`, `--limit 3` (trial run: never writes the accepted file), `--retry-abstentions`, `--aggregate-only` (always the full item set; cannot be combined with `--limit`). A transport error or HTTP 5xx from Ollama is retried once after 30 s; a second failure stops the run and deletes the model, and finished batches stay cached.
+4. `python -m brand_study llm-sample` — draws a blinded, stratified sample of 50 items (fixed seed) into `results/llm_validation_sample.csv`. Fill `human_category` (and optionally `human_note`) **before** you open `llm_disagreements.csv`, and do not open `llm_labels/validation_snapshot.json`. Saving the file from Excel or LibreOffice is fine (BOM, CRLF, padded `#` lines and Excel's Windows-1252 "CSV (comma delimited)" are all read); keep the comma separator, and do not add, rename or reorder `sample_id`s. The sample scores the acceptance policy `llm-label` actually applied (read from the `# policy=` line of `llm_label_overrides.csv`); an `--accept` that differs from it is refused.
+5. `python -m brand_study llm-agreement` — writes `results/llm_validation.md` and `results/llm_validation_overrides_snippet.csv`. If the bias check is inconclusive, `llm-sample --extend 30` adds items (existing labels are kept); label them and run `llm-agreement` again. Items you have since resolved in `label_overrides.csv` stay eligible for the extension (their evidence comes from `llm_labels/items.jsonl`), so each stratum is still drawn at random. Rows you leave blank are treated as missing at random within their stratum (weights use only the answered rows) and the report flags the results as preliminary; label every row before relying on them.
+6. Append the snippet rows you agree with to `label_overrides.csv` (your labels then win everywhere).
+7. Resolve `llm_disagreements.csv` by adding rows to `label_overrides.csv`.
+8. `python -m brand_study llm-label --aggregate-only`, then `python -m brand_study analyze`.
+
+`analyze` uses the accepted file automatically. `--no-llm-labels` ignores it, and `--llm-overrides PATH` (or env
+`BRAND_STUDY_LLM_OVERRIDES`) points to another file.
+
+**Runs.** Label once, after the last collection run. Items first seen in a later run, and items whose evidence
+changes, become pending. Until `llm-label` finishes again, the previous accepted file stays in use, and `analyze`
+and the report warn when its `runs=` header differs from the runs being analysed. `--reuse-stale-votes` aggregates
+with each item's newest vote instead (marked `stale_evidence`).
+
+**Validation and the bias test, in plain words.** The sample is stratified by the judges' majority category
+(big, small, other) and whether they agreed, so it deliberately over-represents some groups. `llm-agreement` reports
+per-judge accuracy and Cohen's κ, the accuracy of the labels aggregation actually accepted (frozen in the snapshot;
+a unanimous vote sent to you because it conflicts with a candidate rule does not count) and of all unanimous-vote
+items, pairwise agreement and Fleiss' κ,
+and confusion matrices. The **big-brand bias check** is one test decided before you label: "the judges move
+businesses you call small to big more often than the reverse" (one-sided, α = 0.05). It uses a sample-weighted
+estimate (the weighted net shift) with a stratified bootstrap, because the raw counts from a stratified sample can
+show an asymmetry that does not exist, or hide one that does. It needs at least 5 big↔small disagreements with you
+to give any verdict. With 50 items, only a fairly strong bias is detectable. The unweighted McNemar numbers are shown
+for description only.
+
+**Cost and time** (estimates; the first real run will confirm them)
+
+| Step | Estimate |
+|---|---|
+| Homepage fetch, about 283 domains | 5–10 min |
+| Batches | 298 / 12 ≈ 25 per judge, plus a few small retries. A batch with only some items pending (e.g. after `--retry-abstentions`) is resent whole, so within one run over the same selection every judge sees byte-identical batches; this costs extra Claude usage for the already-answered items. Batches are built from the selection, so votes from a `--limit` trial (or a `--judges` subset run with a different `--limit`) were made with different batch neighbours than a later full run; for strictly identical prompts across judges, do trials in a scratch output directory or run every judge over the same selection |
+| Gemma 4 31B | about 20 GB download (5–20 min), then about 0.5–2 h |
+| Qwen 3.8 27B | about 18 GB download, similar time |
+| Claude Opus 5.5, high effort | about 25 CLI calls of about 8–10k input tokens each, about 0.5–1.5 h. This counts against your Claude plan's usage limits; the run waits automatically when it hits one |
+| Total | about 2–5 h of wall time. Your time: the 50 sample items plus the disagreements, about 30–60 min plus the disagreement count (`--extend 30` adds about 20 min) |
+| Labeling before run2 | means another pull of both models and a partial rerun later |
+
+**Limitations**
+
+- LLMs may favour global brands over local ones, and all three judges can share that bias. The validation can show it, but with 50 items its power is limited, the CIs are wide, and the percentile bootstrap can undercover with small strata.
+- Claude cannot run at temperature 0, and its isolation is limited to the flags the installed CLI supports (the user-level `CLAUDE.md`/auto-memory cannot be switched off without breaking the login, so the CLI may add a little context of its own; `--claude-diagnose` shows the token counts).
+- Evidence comes from data already collected plus a single homepage (at most 3 redirects, no robots.txt check; a DNS-rebinding gap remains between the IP check and the request).
+- LLM labels can confirm candidate AIO mentions (reported separately). An entity whose candidate rules differ between sectors always goes to you.
+- Ollama tags can be re-pushed. The model digests and the Claude CLI version are recorded on every vote.
 
 ### Ollama model lifecycle helper (for Part 2)
 

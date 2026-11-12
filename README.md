@@ -265,11 +265,14 @@ An observational study in `ai-search-content-copilot/brand_study/` that measures
   - the share of queries with an AI Overview
   - run-to-run stability
 - **Cost control:** a budget guard and a dry run (`--dry-run`). One full run is at most about 110 searches
+- **LLM labeling (optional):** after the last collection run, three LLM judges (Gemma 4 31B and Qwen 3.8 27B via Ollama, Claude Opus 5.5 via the Claude Code CLI) label the items the rules leave unknown, using evidence from the collected results and each site's homepage. Only unanimous labels fill gaps the rules leave (human overrides and rules always win), and disagreements go to the human. Accuracy and a pre-specified, sample-weighted big-brand bias test come from a blinded, stratified human sample, and the human labels are fed back into the overrides. About 2–5 h of wall time; LLMs may favour global brands, and a 50-item sample only detects a fairly strong bias
 
 ```bash
 cd ai-search-content-copilot
 python3 -m brand_study collect --run run1 --dry-run   # what it would spend (0 searches)
 python3 -m brand_study collect --run run1             # later: --run run2
+python3 -m brand_study llm-label --dry-run            # optional LLM labeling: what it would do
+python3 -m brand_study llm-label                      # three judges; then llm-sample / llm-agreement
 python3 -m brand_study analyze                        # CSVs + report.md (0 searches)
 ```
 
